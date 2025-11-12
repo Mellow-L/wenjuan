@@ -1,11 +1,10 @@
 import React from "react"
-import List from "./pages/List"
+import { RouterProvider } from "react-router-dom"
+import routerConfig from "./router"
 function App() {
 
-  return (<>
-    <h1>问卷列表页</h1>
-    <List></List>
-  </>   
+  return (
+    <RouterProvider router={routerConfig}></RouterProvider>
   )
 }
 
