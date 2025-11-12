@@ -2,7 +2,7 @@ import React, { useState, type FC } from "react";
 import QuestionCard from "../../components/QuestionCard";
 import styles from './List.module.scss'
 import { useSearchParams } from "react-router-dom";
-
+import {useTitle} from 'ahooks'
 const rawQuestionList = [
   {
     _id: "q1",
@@ -38,6 +38,7 @@ const rawQuestionList = [
   },
 ]
 const List: FC = () => {
+  useTitle('我的问卷列表')
   const [searchParams] = useSearchParams()
   console.log('keyword参数',searchParams.get('keyword'));
   
