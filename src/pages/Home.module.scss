@@ -10,11 +10,20 @@
   background-image: linear-gradient(to top, #ebbba7 0%, #cfc7f8 100%);
   
   .button{
-    font-size: 20px;
+    font-size: 30px;
     font-style: italic;
-    color: #ebbba7;
+    font-weight: 500;
+    color: #7e7a95;
+    background-color: #e6e6e6;
+  }
+
+  :global(.ant-btn){
     &:hover{
-      color: #cfc7f8;
+      // color: #cfc7f8 !important;
+      // border-color: #cfc7f8 !important;
+      background-color: #DBC1C7 !important;
+      color: #000000 !important;
+      border-color: #DBC1C7 !important;
     }
   }
 }

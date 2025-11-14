@@ -28,7 +28,7 @@ const MainLayout: FC = () => {
       </Content>
 
       <Footer className={styles.footer}>
-        问卷调查工具 &copy; 2025 created by 林怡然
+        问卷调查工具 &copy; 2025 - present. Created by 林怡然
       </Footer>
     </Layout>  
   </>)
