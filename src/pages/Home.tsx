@@ -1,14 +1,15 @@
 import { Button } from "antd";
 import React,{type FC} from "react";
 import { useNavigate } from "react-router-dom";
+import { LOGIN_PATHNAME, REGISTER_PATHNAME } from "../router";
 
 const Home: FC = () => {
   const nav = useNavigate()
   function gotoLogin(){
-    nav('/login')
+    nav(LOGIN_PATHNAME)
   }
   function gotoRegister(){
-    nav('/register')
+    nav(REGISTER_PATHNAME)
   }
   return (<>
     <p>Home</p>
