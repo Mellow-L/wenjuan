@@ -2,6 +2,8 @@ import React,{type FC} from "react";
 import {Outlet} from 'react-router-dom'
 import styles from './MainLayout.module.scss'
 import { Layout } from "antd";
+import Logo from "../components/Logo";
+import UserInfo from "../components/UseInfo";
 const {Header,Content,Footer} = Layout
 const MainLayout: FC = () => {
 
@@ -14,10 +16,10 @@ const MainLayout: FC = () => {
     <Layout> 
       <Header className={styles.header}>
         <div className={styles.left}>
-
+          <Logo/>
         </div>
         <div className={styles.right}>
-
+          <UserInfo/>
         </div>
       </Header>
 
