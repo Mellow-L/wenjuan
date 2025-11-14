@@ -1,5 +1,7 @@
 import React,{type FC} from "react";
 import styles from './QuestionCard.module.scss'
+import { Button, Space } from "antd";
+import { CopyOutlined, DeleteOutlined, FormOutlined, PieChartOutlined, StarOutlined } from "@ant-design/icons";
 type PropsType = {
   _id:string
   title: string
@@ -24,17 +26,17 @@ const QuestionCard: FC<PropsType> = (props:PropsType) =>{
         </div>
       </div>
 
-      <div className={styles['button-container']}>
-        <div className={styles.left}>
-          <button>编辑问卷</button>
-          <button>数据统计</button>
-        </div>
-        <div className={styles.right}>
-          <button>收藏</button>
-          <button>复制</button>
-          <button>删除</button>
-        </div>
-      </div>
+      <Space direction="horizontal" className={styles['Button-container']}>
+        <Space className={styles.left}>
+          <Button icon={<FormOutlined />}>Edit</Button>
+          <Button icon={<PieChartOutlined />}>Statistic</Button>
+        </Space>
+        <Space className={styles.right}>
+          <Button icon={<StarOutlined />}></Button>
+          <Button icon={<CopyOutlined />}></Button>
+          <Button icon={<DeleteOutlined />}></Button>
+        </Space>
+      </Space>
     </div>
   </>)
 }

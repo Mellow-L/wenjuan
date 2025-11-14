@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import React,{type FC} from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,8 +12,8 @@ const Home: FC = () => {
   }
   return (<>
     <p>Home</p>
-    <button onClick={gotoLogin}>登录</button>
-    <button onClick={gotoRegister}>注册</button>
+    <Button onClick={gotoLogin}>登录</Button>
+    <Button onClick={gotoRegister}>注册</Button>
   </>)
 }
 
