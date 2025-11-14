@@ -3,6 +3,10 @@ import QuestionCard from "../../components/QuestionCard";
 import styles from './List.module.scss'
 import { useSearchParams } from "react-router-dom";
 import {useTitle} from 'ahooks'
+
+import {Input} from 'antd'
+const {Search} = Input
+
 const rawQuestionList = [
   {
     _id: "q1",
@@ -43,6 +47,10 @@ const List: FC = () => {
   console.log('keyword参数',searchParams.get('keyword'));
   
 	const [questionList, setQuestionList] = useState(rawQuestionList);
+  function onSearch(){
+    console.log('搜索问卷');
+    
+  }
 	return (
 		<>
       <div className={styles.header}>
@@ -50,7 +58,7 @@ const List: FC = () => {
           <h3>我的问卷</h3>
         </div>
         <div className={styles.right}>
-          （搜索功能）
+          <Search placeholder="搜索你的问卷" onSearch={onSearch} enterButton />
         </div>
       </div>
 
