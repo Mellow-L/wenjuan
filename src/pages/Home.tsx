@@ -1,20 +1,22 @@
 import { Button } from "antd";
 import React,{type FC} from "react";
 import { useNavigate } from "react-router-dom";
-import { LOGIN_PATHNAME, REGISTER_PATHNAME } from "../router";
+import {Typography} from 'antd'
+import { MANAGE_LIST_PATHNAME } from "../router";
+const {Title ,Paragraph} = Typography
+import styles from './Home.module.scss'
 
 const Home: FC = () => {
   const nav = useNavigate()
-  function gotoLogin(){
-    nav(LOGIN_PATHNAME)
-  }
-  function gotoRegister(){
-    nav(REGISTER_PATHNAME)
-  }
   return (<>
-    <p>Home</p>
-    <Button onClick={gotoLogin}>登录</Button>
-    <Button onClick={gotoRegister}>注册</Button>
+    <div className={styles.container}>
+      <Title>问卷调查｜制作、发布你的问卷，与大模型一同分析答卷</Title>
+      <Paragraph>本站已累计创建问卷 x 份，发布问卷 y 份，收到答卷 z 份</Paragraph>
+      
+      <Button className={styles.button} onClick={()=>nav(MANAGE_LIST_PATHNAME)}>
+        Start ! 
+      </Button>
+    </div>  
   </>)
 }
 
