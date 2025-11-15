@@ -1,6 +1,6 @@
 import React, { type FC } from "react";
 import styles from "./QuestionCard.module.scss";
-import { Button, Divider, Space, Tag } from "antd";
+import { Button, Divider, message, Popconfirm, Space, Tag, type PopconfirmProps } from "antd";
 import {
 	CopyOutlined,
 	DeleteOutlined,
@@ -23,6 +23,19 @@ type PropsType = {
 const QuestionCard: FC<PropsType> = (props: PropsType) => {
 	const nav = useNavigate();
 	const { _id, title, isPublished, isStar, answerCount, createdAt } = props;
+	
+	const confirm: PopconfirmProps['onConfirm'] = (e) => {
+		console.log(e);
+		message.success('Click on Yes');
+		// alert('yes')
+	};
+
+	const cancel: PopconfirmProps['onCancel'] = (e) => {
+		console.log(e);
+		message.error('Click on No');
+		// alert('no')
+	};
+
 	return (
 		<>
 			<div className={styles.container}>
@@ -59,9 +72,21 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 						</Button>
 					</Space>
 					<Space className={styles.right}>
-						<Button icon={isStar ? <StarFilled /> : <StarOutlined />}></Button>
-						<Button icon={<CopyOutlined />}></Button>
-						<Button icon={<DeleteOutlined />}></Button>
+						
+						<Button icon={isStar ? <StarFilled /> : <StarOutlined />}></Button>	
+
+						<Button icon={<CopyOutlined />} ></Button>						
+
+						<Popconfirm
+							title="删除"
+							description="确认删除该问卷？"
+							onConfirm={confirm}
+							onCancel={cancel}
+							okText="确认"
+							cancelText="取消"
+						>	
+							<Button icon={<DeleteOutlined />}></Button>
+						</Popconfirm>
 					</Space>
 				</Space>
 			</div>
