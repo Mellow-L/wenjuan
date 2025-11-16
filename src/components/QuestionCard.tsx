@@ -24,15 +24,15 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 	const nav = useNavigate();
 	const { _id, title, isPublished, isStar, answerCount, createdAt } = props;
 	
-	const confirm: PopconfirmProps['onConfirm'] = (e) => {
+	const confirmDelete: PopconfirmProps['onConfirm'] = (e) => {
 		console.log(e);
-		message.success('Click on Yes');
+		message.success('已移入回收站');
 		// alert('yes')
 	};
 
-	const cancel: PopconfirmProps['onCancel'] = (e) => {
+	const cancelDelete: PopconfirmProps['onCancel'] = (e) => {
 		console.log(e);
-		message.error('Click on No');
+		message.error('删除失败');
 		// alert('no')
 	};
 
@@ -80,8 +80,8 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 						<Popconfirm
 							title="删除"
 							description="确认删除该问卷？"
-							onConfirm={confirm}
-							onCancel={cancel}
+							onConfirm={confirmDelete}
+							onCancel={cancelDelete}
 							okText="确认"
 							cancelText="取消"
 						>	

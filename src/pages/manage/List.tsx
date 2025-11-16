@@ -4,9 +4,9 @@ import styles from './Common.module.scss'
 import { useSearchParams } from "react-router-dom";
 import {useTitle} from 'ahooks'
 
-import {Input} from 'antd'
+import {Input, Typography} from 'antd'
 const {Search} = Input
-
+const {Title} = Typography
 const rawQuestionList = [
   {
     _id: "q1",
@@ -43,8 +43,6 @@ const rawQuestionList = [
 ]
 const List: FC = () => {
   useTitle('我的问卷列表')
-  const [searchParams] = useSearchParams()
-  console.log('keyword参数',searchParams.get('keyword'));
   
 	const [questionList, setQuestionList] = useState(rawQuestionList);
   function onSearch(){
@@ -55,7 +53,7 @@ const List: FC = () => {
 		<>
       <div className={styles.header}>
         <div className={styles.left}>
-          <h3>我的问卷</h3>
+          <Title level={3}>我的问卷</Title>
         </div>
         <div className={styles.right}>
           <Search placeholder="搜索你的问卷" onSearch={onSearch} enterButton />
