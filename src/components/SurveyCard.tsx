@@ -1,5 +1,5 @@
 import React, { type FC } from "react";
-import styles from "./QuestionCard.module.scss";
+import styles from "./SurveyCard.module.scss";
 import { Button, Divider, message, Popconfirm, Space, Tag, type PopconfirmProps } from "antd";
 import {
 	CopyOutlined,
@@ -20,7 +20,7 @@ type PropsType = {
 	answerCount: number;
 	createdAt: string;
 };
-const QuestionCard: FC<PropsType> = (props: PropsType) => {
+const SurveyCard: FC<PropsType> = (props: PropsType) => {
 	const nav = useNavigate();
 	const { _id, title, isPublished, isStar, answerCount, createdAt } = props;
 	
@@ -41,7 +41,7 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 			<div className={styles.container}>
 				<div className={styles.title}>
 					<div className={styles.left}>
-						<Link to={isPublished? `/question/stat/${_id}`:`/question/edit/${_id}` }>{title}</Link>
+						<Link to={isPublished? `/survey/stat/${_id}`:`/survey/edit/${_id}` }>{title}</Link>
 					</div>
 					<div className={styles.right}>
 						{isPublished ? (
@@ -58,14 +58,14 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 					<Space className={styles.left}>
 						<Button
 							icon={<FormOutlined />}
-							onClick={() => nav(`/question/edit/${_id}`)}
+							onClick={() => nav(`/survey/edit/${_id}`)}
 						>
 							Edit
 						</Button>
 
 						<Button
 							icon={<PieChartOutlined />}
-							onClick={() => nav(`/question/stat/${_id}`)}
+							onClick={() => nav(`/survey/stat/${_id}`)}
 							disabled={!isPublished}
 						>
 							Statistic
@@ -94,4 +94,4 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 	);
 };
 
-export default QuestionCard;
+export default SurveyCard;

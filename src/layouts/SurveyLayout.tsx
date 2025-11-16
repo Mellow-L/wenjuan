@@ -1,13 +1,13 @@
 import React,{type FC} from "react";
 import { Outlet } from "react-router-dom";
-const QuestionLayout: FC = () => {
+const SurveyLayout: FC = () => {
 
   return (<>
-    <div>QuestionLayout</div>
+    <div>SurveyLayout</div>
     <div>
        <Outlet></Outlet>
     </div>
   </>)
 }
 
-export default QuestionLayout
+export default SurveyLayout

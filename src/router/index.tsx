@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import MainLayout from "../layouts/MainLayout";
 import ManageLayout from "../layouts/ManageLayout";
-import QuestionLayout from "../layouts/QuestionLayout";
+import SurveyLayout from "../layouts/SurveyLayout";
 
 import Home from "../pages/Home";
 import Login from "../pages/Login";
@@ -11,8 +11,8 @@ import NotFound from "../pages/NotFound";
 import Register from "../pages/Register";
 
 import List from "../pages/manage/List";
-import Edit from "../pages/question/Edit";
-import Stat from "../pages/question/Stat";
+import Edit from "../pages/survey/Edit";
+import Stat from "../pages/survey/Stat";
 import Trash from "../pages/manage/Trash";
 import Star from "../pages/manage/Star";
 
@@ -58,8 +58,8 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path:'/question',
-    element:<QuestionLayout/>,
+    path:'/survey',
+    element:<SurveyLayout/>,
     children:[
       {
         path:'edit/:id',

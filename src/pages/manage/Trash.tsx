@@ -5,7 +5,7 @@ import { useTitle } from "ahooks";
 
 import { Button, Input, message, Popconfirm, Space, Table, Tag, Typography, type PopconfirmProps } from "antd";
 const { Title } = Typography;
-const rawQuestionList = [
+const rawSurveyList = [
 	{
 		_id: "q1",
 		title: "问卷1",
@@ -62,7 +62,7 @@ const columns = [
 ];
 const Trash: FC = () => {
 	useTitle("问卷回收站");
-	const [questionList, setQuestionList] = useState(rawQuestionList);
+	const [surveyList, setSurveyList] = useState(rawSurveyList);
   const [selectedIds,setSelectedIds] = useState<string[]>([])
 
 	const confirmErase: PopconfirmProps['onConfirm'] = (e) => {
@@ -114,9 +114,9 @@ const Trash: FC = () => {
       </Space>     
     </div>
     <Table
-      dataSource={questionList}
+      dataSource={surveyList}
       columns={columns}
-      rowKey={(question) => question._id}
+      rowKey={(survey) => survey._id}
       rowSelection={{
         type:'checkbox',
         onChange:selectedRowKeys => {
