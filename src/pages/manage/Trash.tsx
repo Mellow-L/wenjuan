@@ -76,10 +76,31 @@ const Trash: FC = () => {
 		message.error('抹除失败');
 		// alert('no')
 	};
+
+  const confirmRecover: PopconfirmProps['onConfirm'] = (e) => {
+		console.log(e);
+		message.success('恢复成功');
+		// alert('yes')
+	};
+
+	const cancelRecover: PopconfirmProps['onCancel'] = (e) => {
+		console.log(e);
+		message.error('恢复失败');
+		// alert('no')
+	};
   const TableElem = <>
     <div>
       <Space>
-        <Button type="primary" disabled={selectedIds.length === 0}>恢复</Button>
+        <Popconfirm
+          title="抹除"
+          description={<>确认恢复{selectedIds}？</>}
+          onConfirm={confirmRecover}
+          onCancel={cancelRecover}
+          okText="确认"
+          cancelText="取消">
+          <Button type="primary" disabled={selectedIds.length === 0}>恢复</Button>
+        </Popconfirm>
+        
 
         <Popconfirm
           title="抹除"
