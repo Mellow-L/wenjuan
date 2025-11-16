@@ -1,5 +1,5 @@
 import React, { useState, type FC } from "react";
-import QuestionCard from "../../components/QuestionCard";
+import SurveyCard from "../../components/SurveyCard";
 import styles from './Common.module.scss'
 import { useSearchParams } from "react-router-dom";
 import {useTitle} from 'ahooks'
@@ -7,7 +7,7 @@ import {useTitle} from 'ahooks'
 import {Input, Typography} from 'antd'
 const {Search} = Input
 const {Title} = Typography
-const rawQuestionList = [
+const rawSurveyList = [
   {
     _id: "q1",
     title: "问卷1",
@@ -44,7 +44,7 @@ const rawQuestionList = [
 const List: FC = () => {
   useTitle('我的问卷列表')
   
-	const [questionList, setQuestionList] = useState(rawQuestionList);
+	const [surveyList, setSurveyList] = useState(rawSurveyList);
   function onSearch(){
     console.log('搜索问卷');
     
@@ -61,10 +61,10 @@ const List: FC = () => {
       </div>
 
       <div className={styles.content}>
-        { questionList.length > 0 &&
-          questionList.map(question => {
-          const {_id} = question
-          return <QuestionCard key={_id} {...question}></QuestionCard>
+        { surveyList.length > 0 &&
+          surveyList.map(survey => {
+          const {_id} = survey
+          return <SurveyCard key={_id} {...survey}></SurveyCard>
         })}
       </div>
 
