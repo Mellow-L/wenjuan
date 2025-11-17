@@ -1,9 +1,8 @@
 import React, { useState, type FC } from "react";
 import styles from "./Common.module.scss";
-import { useSearchParams } from "react-router-dom";
 import { useTitle } from "ahooks";
 
-import { Button, Input, message, Popconfirm, Space, Table, Tag, Typography, type PopconfirmProps } from "antd";
+import { Button, message, Popconfirm, Space, Table, Tag, Typography, type PopconfirmProps } from "antd";
 const { Title } = Typography;
 const rawSurveyList = [
 	{

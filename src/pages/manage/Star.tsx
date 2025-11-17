@@ -1,11 +1,10 @@
 import React, { useState, type FC } from "react";
 import SurveyCard from "../../components/SurveyCard";
 import styles from './Common.module.scss'
-import { useSearchParams } from "react-router-dom";
 import {useTitle} from 'ahooks'
 
-import {Empty, Input, Typography} from 'antd'
-const {Search} = Input
+import {Empty, Typography} from 'antd'
+import SurveyFinder from "../../components/SurveyFinder";
 const {Title} = Typography
 const rawSurveyList = [
   {
@@ -44,10 +43,6 @@ const rawSurveyList = [
 const Star: FC = () => {
   useTitle('我收藏的问卷') 
 	const [surveyList, setSurveyList] = useState(rawSurveyList);
-  function onSearch(){
-    console.log('搜索问卷');
-    
-  }
 	return (
 		<>
       <div className={styles.header}>
@@ -55,7 +50,7 @@ const Star: FC = () => {
           <Title level={3}>我收藏的问卷</Title>  
         </div>
         <div className={styles.right}>
-          <Search placeholder="搜索你的问卷" onSearch={onSearch} enterButton />
+          <SurveyFinder/>
         </div>
       </div>
 
