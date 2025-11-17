@@ -1,6 +1,6 @@
 import React, { useState, type FC } from "react";
 import SurveyCard from "../../components/SurveyCard";
-import styles from './Common.module.scss'
+import styles from '../../styles/ManageCommon.module.scss'
 import {useTitle} from 'ahooks'
 
 import {Empty, Typography} from 'antd'
