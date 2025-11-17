@@ -1,5 +1,5 @@
 import React, { useState, type FC } from "react";
-import styles from "./Common.module.scss";
+import styles from '../../styles/ManageCommon.module.scss'
 import { useTitle } from "ahooks";
 
 import { Button, message, Popconfirm, Space, Table, Tag, Typography, type PopconfirmProps } from "antd";

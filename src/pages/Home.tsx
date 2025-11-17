@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {Typography} from 'antd'
 import { MANAGE_LIST_PATHNAME } from "../router";
 const {Title ,Paragraph} = Typography
-import styles from './Home.module.scss'
+import styles from '../styles/Common.module.scss'
 
 const Home: FC = () => {
   const nav = useNavigate()
