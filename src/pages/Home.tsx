@@ -1,12 +1,19 @@
 import { Button } from "antd";
-import React,{type FC} from "react";
+import React,{useEffect, type FC} from "react";
 import { useNavigate } from "react-router-dom";
 import {Typography} from 'antd'
 import { MANAGE_LIST_PATHNAME } from "../router";
 const {Title ,Paragraph} = Typography
 import styles from '../styles/Common.module.scss'
-
+import axios from "axios";
 const Home: FC = () => {
+  useEffect(()=>{
+    // fetch('/api/test')
+    //   .then(res => res.json())
+    //   .then(data => console.log('fetch data', data))
+    axios.get('/api/test')
+      .then(res=>console.log(res,'and',res.data))
+  })
   const nav = useNavigate()
   return (<>
     <div className={styles.container}>
