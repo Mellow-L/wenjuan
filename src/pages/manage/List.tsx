@@ -1,10 +1,11 @@
 import React, { useState, type FC } from "react";
 import styles from '../../styles/ManageCommon.module.scss'
-import {useTitle} from 'ahooks'
+import {useRequest, useTitle} from 'ahooks'
 
-import { Typography} from 'antd'
+import { Spin, Typography} from 'antd'
 import SurveyFinder from "../../components/SurveyFinder";
 import SurveyCard from "../../components/SurveyCard";
+import { getSurveyListService } from "../../services/survey";
 const {Title} = Typography
 const rawSurveyList = [
   {
@@ -43,7 +44,9 @@ const rawSurveyList = [
 const List: FC = () => {
   useTitle('我的问卷列表')
   
-	const [surveyList, setSurveyList] = useState(rawSurveyList);
+	// const [surveyList, setSurveyList] = useState(rawSurveyList);
+  const {loading, data={}, error} = useRequest(getSurveyListService)
+  const {list = [],total = 0} = data
 
 	return (
 		<>
@@ -57,8 +60,11 @@ const List: FC = () => {
       </div>
 
       <div className={styles.content}>
-        { surveyList.length > 0 &&
-          surveyList.map(survey => {
+        {loading && (<Spin tip="Loading" size="large">
+          <div style={{ minHeight: 100 }} />
+        </Spin>) }
+        { list.length > 0 &&
+          list.map(survey => {
           const {_id} = survey
           return <SurveyCard key={_id} {...survey}></SurveyCard>
         })}
