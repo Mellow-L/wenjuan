@@ -32,7 +32,7 @@ const List: FC = () => {
           <div style={{ minHeight: 100 }} />
         </Spin>) }
         { list.length > 0 &&
-          list.map(survey => {
+          list.map(survey => { 
           const {_id} = survey
           return <SurveyCard key={_id} {...survey}></SurveyCard>
         })}

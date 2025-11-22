@@ -2,7 +2,8 @@ import myAxios,{type ResDataType} from "./ajax";
 
 type SearchOption = {
   keyword: string,
-  //
+  isStar: boolean, // 检索收藏的问卷
+  isDeleted: boolean //检索回收站
 }
 // 获取单个问卷信息
 export async function getSurveyService(id:string):Promise<ResDataType> {
