@@ -1,5 +1,9 @@
 import myAxios,{type ResDataType} from "./ajax";
 
+type SearchOption = {
+  keyword: string,
+  //
+}
 // 获取单个问卷信息
 export async function getSurveyService(id:string):Promise<ResDataType> {
   const url = `/api/survey/${id}`
@@ -15,8 +19,10 @@ export async function createSurveyService():Promise<ResDataType>{
 }
 
 // get 获取问卷列表
-export async function getSurveyListService():Promise<ResDataType>{
+export async function getSurveyListService(
+  opt: Partial<SearchOption> = {}
+):Promise<ResDataType>{
   const url = `/api/survey`
-  const data = (await myAxios.get(url)) as ResDataType
+  const data = (await myAxios.get(url,{params:opt})) as ResDataType
   return data
 }
