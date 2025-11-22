@@ -2,42 +2,11 @@ import React, { useState, type FC } from "react";
 import styles from '../../styles/ManageCommon.module.scss'
 import { useTitle } from "ahooks";
 
-import { Button, message, Popconfirm, Space, Table, Tag, Typography, type PopconfirmProps } from "antd";
+import { Button, Empty, message, Popconfirm, Space, Spin, Table, Tag, Typography, type PopconfirmProps } from "antd";
+import useLoadSurveyListData from "../../hooks/useLoadSurveyListData";
+import SurveyFinder from "../../components/SurveyFinder";
 const { Title } = Typography;
-const rawSurveyList = [
-	{
-		_id: "q1",
-		title: "问卷1",
-		isPublished: true,
-		isStar: true,
-		answerCount: 3,
-		createdAt: "2月27日 11:11",
-	},
-	{
-		_id: "q2",
-		title: "问卷2",
-		isPublished: false,
-		isStar: true,
-		answerCount: 2,
-		createdAt: "12月27日 15:11",
-	},
-	{
-		_id: "q3",
-		title: "问卷3",
-		isPublished: true,
-		isStar: true,
-		answerCount: 9,
-		createdAt: "5月6日 10:48",
-	},
-	{
-		_id: "q4",
-		title: "问卷4",
-		isPublished: false,
-		isStar: true,
-		answerCount: 3,
-		createdAt: "1月1日 5:56",
-	},
-];
+
 const columns = [
 	{
 		title: "标题",
@@ -61,7 +30,8 @@ const columns = [
 ];
 const Trash: FC = () => {
 	useTitle("问卷回收站");
-	const [surveyList, setSurveyList] = useState(rawSurveyList);
+	const {data, loading} = useLoadSurveyListData({isDeleted:true})
+  const {list = [],total = 0} = data || {}
   const [selectedIds,setSelectedIds] = useState<string[]>([])
 
 	const confirmErase: PopconfirmProps['onConfirm'] = (e) => {
@@ -98,8 +68,7 @@ const Trash: FC = () => {
           okText="确认"
           cancelText="取消">
           <Button type="primary" disabled={selectedIds.length === 0}>恢复</Button>
-        </Popconfirm>
-        
+        </Popconfirm>     
 
         <Popconfirm
           title="抹除"
@@ -112,10 +81,11 @@ const Trash: FC = () => {
         </Popconfirm>
       </Space>     
     </div>
+
     <Table
-      dataSource={surveyList}
+      dataSource={list}
       columns={columns}
-      rowKey={(survey) => survey._id}
+      rowKey={(survey) => survey._id} // 传入 dataSource 的单个元素
       rowSelection={{
         type:'checkbox',
         onChange:selectedRowKeys => {
@@ -135,11 +105,26 @@ const Trash: FC = () => {
 
 				<div className={styles.right}>		
           {JSON.stringify(selectedIds)}
+					<SurveyFinder/>
 				</div>
 			</div>
 
 			<div className={styles.content}>
-				{TableElem}
+				{/* 加载状态 */}
+				{loading && (
+					<Spin tip="Loading" size="large">
+						<div style={{ minHeight: 100 }} />
+					</Spin>
+				)}
+				
+				{/* 非空 问卷数据 : 空数据 */}
+				{
+         !loading && 
+          ( 
+            list.length > 0 ? 
+            TableElem : (<Empty description="暂无数据" />)
+          )
+        }
 			</div>
 
 			{/* <div className={styles.footer}>

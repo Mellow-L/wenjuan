@@ -1,47 +1,53 @@
-import React, { useState, type FC } from "react";
+import React, { type FC } from "react";
 import SurveyCard from "../../components/SurveyCard";
-import styles from '../../styles/ManageCommon.module.scss'
-import {useTitle} from 'ahooks'
+import styles from "../../styles/ManageCommon.module.scss";
+import { useTitle } from "ahooks";
 
-import {Empty, Spin, Typography} from 'antd'
+import { Empty, Spin, Typography } from "antd";
 import SurveyFinder from "../../components/SurveyFinder";
 import useLoadSurveyListData from "../../hooks/useLoadSurveyListData";
-const {Title} = Typography
+const { Title } = Typography;
 
 const Star: FC = () => {
-  useTitle('我收藏的问卷') 
-  const {data, loading} = useLoadSurveyListData()
-  const {list = [],total = 0} = data || {}
-	
+	useTitle("我收藏的问卷");
+	const { data, loading } = useLoadSurveyListData({ isStar: true });
+	const { list = [], total = 0 } = data || {};
+
 	return (
 		<>
-      <div className={styles.header}>
-        <div className={styles.left}>
-          <Title level={3}>我收藏的问卷</Title>  
-        </div>
-        <div className={styles.right}>
-          <SurveyFinder/>
-        </div>
-      </div>
+			<div className={styles.header}>
+				<div className={styles.left}>
+					<Title level={3}>我收藏的问卷</Title>
+				</div>
+				<div className={styles.right}>
+					<SurveyFinder />
+				</div>
+			</div>
 
-      <div className={styles.content}>
-        {/* 加载状态 */}
-        {loading && (<Spin tip="Loading" size="large">
-          <div style={{ minHeight: 100 }} />
-        </Spin>) }
+			<div className={styles.content}>
+				{/* 加载状态 */}
+				{loading && (
+					<Spin tip="Loading" size="large">
+						<div style={{ minHeight: 100 }} />
+					</Spin>
+				)}
 
-        {/* 空值状态 */}
-        { list.length === 0 && <Empty description="暂无数据"/>}
-        
-        {/* 非空 问卷数据 */}
-        { list.length > 0 &&
-          list.map(survey => {
-          const {_id} = survey
-          return <SurveyCard key={_id} {...survey}></SurveyCard>
-        })}
-      </div>
+				{/* 非空 问卷数据 : 空数据 */}
+				{
+         !loading && 
+          ( 
+            list.length > 0 ? 
+            (list.map((survey) => {
+                const { _id } = survey;
+                return <SurveyCard key={_id} {...survey}></SurveyCard>;
+              })) 
+              : 
+            (<Empty description="暂无数据" />)
+          )
+        }
+			</div>
 
-      {/* <div className={styles.footer}>
+			{/* <div className={styles.footer}>
         footer
       </div> */}
 		</>
