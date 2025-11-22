@@ -27,3 +27,10 @@ export async function getSurveyListService(
   const data = (await myAxios.get(url,{params:opt})) as ResDataType
   return data
 }
+
+// delete 删除或批量删除问卷，根据传入的数组 ids
+export async function deleteSurveysService( ids:string[] ):Promise<ResDataType>{
+  const url = `/api/survey`
+  const data = (await myAxios.delete(url,{data: ids})) as ResDataType
+  return data
+}

@@ -1,10 +1,11 @@
 import React, { useState, type FC } from "react";
 import styles from '../../styles/ManageCommon.module.scss'
-import { useTitle } from "ahooks";
+import { useRequest, useTitle } from "ahooks";
 
 import { Button, Empty, message, Popconfirm, Space, Spin, Table, Tag, Typography, type PopconfirmProps } from "antd";
 import useLoadSurveyListData from "../../hooks/useLoadSurveyListData";
 import SurveyFinder from "../../components/SurveyFinder";
+import { deleteSurveysService } from "../../services/survey";
 const { Title } = Typography;
 
 const columns = [
@@ -36,8 +37,7 @@ const Trash: FC = () => {
 
 	const confirmErase: PopconfirmProps['onConfirm'] = (e) => {
 		console.log(e);
-		message.success('抹除成功');
-		// alert('yes')
+		deleteSurveys()
 	};
 
 	const cancelErase: PopconfirmProps['onCancel'] = (e) => {
@@ -57,6 +57,14 @@ const Trash: FC = () => {
 		message.error('恢复失败');
 		// alert('no')
 	};
+
+	const {run: deleteSurveys} = useRequest(async () => await deleteSurveysService(selectedIds),{
+		manual:true,
+		onSuccess(){
+			message.success('抹除成功');
+			setSelectedIds([])
+		}
+	})
   const TableElem = <>
     <div>
       <Space>
@@ -72,7 +80,7 @@ const Trash: FC = () => {
 
         <Popconfirm
           title="抹除"
-          description={<>是否彻底删除{selectedIds}？</>}
+          description={<>是否彻底删除{JSON.stringify(selectedIds)}？</>}
           onConfirm={confirmErase}
           onCancel={cancelErase}
           okText="确认"
@@ -88,6 +96,7 @@ const Trash: FC = () => {
       rowKey={(survey) => survey._id} // 传入 dataSource 的单个元素
       rowSelection={{
         type:'checkbox',
+				selectedRowKeys:selectedIds,
         onChange:selectedRowKeys => {
           console.log('选中的rowKeys',selectedRowKeys);
           setSelectedIds(selectedRowKeys as string[])
