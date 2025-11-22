@@ -1,21 +1,25 @@
-import React,{useEffect, type FC} from "react";
-import { useParams } from "react-router-dom";
+import React, { type FC } from "react";
 import { useTitle } from "ahooks";
-import { getSurveyService } from "../../../services/survey";
+import { Spin } from "antd";
+import useLoadSurveyData from "../../../hooks/useLoadSurveyData";
+
 const Edit: FC = () => {
-  useTitle('问卷编辑器')
-  const { id = '' } = useParams()
-  async function getSurvey() {
-    const data = await getSurveyService(id)
-    console.log('data',data);     
-  }
-  useEffect(()=>{
-    getSurvey()
-  })
-  return (<>
-    <p>Edit id为：{id} 的问卷</p>
+	useTitle("问卷编辑器");
+	const {loading,data} = useLoadSurveyData()
+	return (
+		<>
+			{/* <p>Edit id为：{id} 的问卷</p> */}
 
-  </>)
-}
+			{loading ? (
+				<Spin tip="Loading" size="large">
+					<div style={{ minHeight: 100 }} />
+				</Spin> 
+			) : (
+				<p>{JSON.stringify(data)}</p>
+			)}
 
-export default Edit
+		</>
+	);
+};
+
+export default Edit;

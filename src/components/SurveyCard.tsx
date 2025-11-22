@@ -10,6 +10,7 @@ import {
 	StarOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
+import { EDIT_PATHNAME, STAT_PATHNAME } from "../router";
 
 
 type PropsType = {
@@ -58,14 +59,14 @@ const SurveyCard: FC<PropsType> = (props: PropsType) => {
 					<Space className={styles.left}>
 						<Button
 							icon={<FormOutlined />}
-							onClick={() => nav(`/survey/edit/${_id}`)}
+							onClick={() => nav(`${EDIT_PATHNAME}/${_id}`)}
 						>
 							Edit
 						</Button>
 
 						<Button
 							icon={<PieChartOutlined />}
-							onClick={() => nav(`/survey/stat/${_id}`)}
+							onClick={() => nav(`${STAT_PATHNAME}/${_id}`)}
 							disabled={!isPublished}
 						>
 							Statistic
