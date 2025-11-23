@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { LIST_SEARCH_PARAM_KEY } from "../constant";
+import { LIST_PAGE_PARAM_KEY, LIST_PAGE_SIZE_DEFAULT, LIST_PAGE_SIZE_PARAM_KEY, LIST_SEARCH_PARAM_KEY } from "../constant";
 import { getSurveyListService } from "../services/survey";
 import { useRequest } from "ahooks";
 
@@ -14,9 +14,11 @@ function useLoadSurveyListData (opt: Partial<OptionType> = {}) {
   const {isStar, isDeleted} = opt
   const getSurveyList = async ()=>{
     const keyword = searchParams.get(LIST_SEARCH_PARAM_KEY)??undefined
+    const page = parseInt(searchParams.get(LIST_PAGE_PARAM_KEY)||'')||1// 无 page 参数则默认为第一页
+    const pageSize = parseInt(searchParams.get(LIST_PAGE_SIZE_PARAM_KEY)||'')||LIST_PAGE_SIZE_DEFAULT// 无则为默认 size 值
     console.log('search keyword:',keyword);
     
-    const data = await getSurveyListService({keyword,isStar,isDeleted})
+    const data = await getSurveyListService({keyword,isStar,isDeleted,page,pageSize})
     return data
   }
    

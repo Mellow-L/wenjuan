@@ -6,6 +6,7 @@ import { Button, Empty, message, Popconfirm, Space, Spin, Table, Tag, Typography
 import useLoadSurveyListData from "../../hooks/useLoadSurveyListData";
 import SurveyFinder from "../../components/SurveyFinder";
 import { deleteSurveysService } from "../../services/survey";
+import ListPagination from "../../components/ListPagination";
 const { Title } = Typography;
 
 const columns = [
@@ -102,6 +103,7 @@ const Trash: FC = () => {
           setSelectedIds(selectedRowKeys as string[])
         }
       }} 
+			pagination={false} // 关掉以使用自定义分页组件
     />
   </>
 	return (
@@ -136,9 +138,9 @@ const Trash: FC = () => {
         }
 			</div>
 
-			{/* <div className={styles.footer}>
-        footer
-      </div> */}
+			<div className={styles.footer}>
+        <ListPagination total={total}/>
+      </div>
 		</>
 	);
 };
