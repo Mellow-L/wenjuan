@@ -3,9 +3,10 @@ import SurveyCard from "../../components/SurveyCard";
 import styles from "../../styles/ManageCommon.module.scss";
 import { useTitle } from "ahooks";
 
-import { Empty, Spin, Typography } from "antd";
+import { Empty, Pagination, Spin, Typography } from "antd";
 import SurveyFinder from "../../components/SurveyFinder";
 import useLoadSurveyListData from "../../hooks/useLoadSurveyListData";
+import ListPagination from "../../components/ListPagination";
 const { Title } = Typography;
 
 const Star: FC = () => {
@@ -47,9 +48,9 @@ const Star: FC = () => {
         }
 			</div>
 
-			{/* <div className={styles.footer}>
-        footer
-      </div> */}
+			<div className={styles.footer}>
+        <ListPagination total={total}/>
+      </div>
 		</>
 	);
 };

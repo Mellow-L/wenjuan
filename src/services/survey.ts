@@ -4,6 +4,8 @@ type SearchOption = {
   keyword: string,
   isStar: boolean, // 检索收藏的问卷
   isDeleted: boolean //检索回收站
+  page: number,
+  pageSize: number,
 }
 // 获取单个问卷信息
 export async function getSurveyService(id:string):Promise<ResDataType> {
@@ -19,7 +21,7 @@ export async function createSurveyService():Promise<ResDataType>{
   return data
 }
 
-// get 获取问卷列表
+// get 获取或查询问卷列表
 export async function getSurveyListService(
   opt: Partial<SearchOption> = {}
 ):Promise<ResDataType>{
