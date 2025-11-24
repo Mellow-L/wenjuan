@@ -42,7 +42,7 @@ const ListPagination:FC<PropType> = (props : PropType) => {
       // defaultCurrent={1}
       current={currentPage}
       pageSize={pageSize}
-      total={total}
+      total={total} // 数据总数在这里用
       style={{ background: "#fff", borderRadius: "5px" }}
       onChange={handlePageChange}
     />

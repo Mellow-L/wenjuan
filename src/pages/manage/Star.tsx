@@ -3,7 +3,7 @@ import SurveyCard from "../../components/SurveyCard";
 import styles from "../../styles/ManageCommon.module.scss";
 import { useTitle } from "ahooks";
 
-import { Empty, Pagination, Spin, Typography } from "antd";
+import { Empty, Spin, Typography } from "antd";
 import SurveyFinder from "../../components/SurveyFinder";
 import useLoadSurveyListData from "../../hooks/useLoadSurveyListData";
 import ListPagination from "../../components/ListPagination";

@@ -7,7 +7,7 @@ type OptionType = {
   isStar: boolean,
   isDeleted: boolean
 }
-// 加载或查询问卷列表。
+// 加载或查询问卷列表。分页。
 // opt 决定查询的是 收藏的问卷 还是 回收站（假删除的问卷）
 function useLoadSurveyListData (opt: Partial<OptionType> = {}) {
   const [searchParams] = useSearchParams()
