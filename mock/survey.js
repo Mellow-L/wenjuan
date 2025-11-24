@@ -3,7 +3,7 @@ const getSurveyList = require('./data/getSurveyList')
 const Random = Mock.Random
 module.exports = [
   {
-    url:'/api/survey/:id',// 获取单个问卷信息
+    url:'/api/survey/:id',// 获取某份问卷信息
     method:'get',
     response(){
       return {
@@ -57,11 +57,23 @@ module.exports = [
     }
   },
   {
-    url:'/api/survey/:id', // 更新问卷信息
+    url:'/api/survey/:id', // 更新某份问卷信息
     method: 'patch',
     response(){
       return{
         errno:0
+      }
+    }
+  },
+  {
+    url:'/api/survey/duplicate/:id', // 复制某份问卷
+    method:'post',
+    response(){
+      return {
+        errno:0,
+        data:{
+          id:Random.id()
+        }
       }
     }
   }
