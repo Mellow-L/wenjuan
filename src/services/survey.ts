@@ -43,3 +43,9 @@ export async function updateSurveyService(id: string,opt:{[key:string]:any}):Pro
   const data = (await myAxios.patch(url, opt)) as ResDataType
   return data
 }
+
+export async function duplicateSurveyService(id:string):Promise<ResDataType>{
+  const url = `/api/survey/duplicate/${id}`
+  const data = (await myAxios.post(url)) as ResDataType
+  return data
+}
