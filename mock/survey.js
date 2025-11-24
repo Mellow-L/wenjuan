@@ -30,13 +30,14 @@ module.exports = [
     }
   },
   {
-    url:'/api/survey',// 查询问卷
+    url:'/api/survey',// 获取或查询问卷
     method:'get',
     response(ctx){
-      const { url = ''} = ctx
+      const { url = '',query = {} } = ctx
       const isDeleted = url.indexOf('isDeleted=true') >= 0
       const isStar = url.indexOf('isStar=true') >= 0
-      const opt = {isDeleted,isStar}
+      const pageSize = parseInt(query.pageSize)
+      const opt = {pageSize,isDeleted,isStar}
       return {
         errno:0,
         data:{

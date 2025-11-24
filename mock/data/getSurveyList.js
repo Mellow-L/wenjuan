@@ -2,9 +2,9 @@ const Mock = require('mockjs')
 const Random = Mock.Random
 
 function getSurveyList(opt = {}){
-  const {len = 10,isStar = false,isDeleted = false} = opt
+  const {pageSize = 10,isStar = false,isDeleted = false} = opt
   const list = []
-  for(let i = 0;i < len;i ++){
+  for(let i = 0;i < pageSize;i ++){
     list.push({
       _id: Random.id(),
       title: Random.ctitle(),
