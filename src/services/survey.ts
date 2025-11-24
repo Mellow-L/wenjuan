@@ -36,3 +36,10 @@ export async function deleteSurveysService( ids:string[] ):Promise<ResDataType>{
   const data = (await myAxios.delete(url,{data: ids})) as ResDataType
   return data
 }
+
+// 更新某份问卷信息，opt 是更新的数据对象
+export async function updateSurveyService(id: string,opt:{[key:string]:any}):Promise<ResDataType>{
+  const url = `/api/survey/${id}`
+  const data = (await myAxios.patch(url, opt)) as ResDataType
+  return data
+}
