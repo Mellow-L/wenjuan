@@ -20,7 +20,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { EDIT_PATHNAME, STAT_PATHNAME } from "../router";
 import { useRequest } from "ahooks";
-import { updateSurveyService } from "../services/survey";
+import { duplicateSurveyService, updateSurveyService } from "../services/survey";
 
 type PropsType = {
 	_id: string;
@@ -45,6 +45,8 @@ const SurveyCard: FC<PropsType> = (props: PropsType) => {
 		message.error("删除失败");
 		// alert('no')
 	};
+
+
 	const [isStarState, setIsStarState] = useState(isStar);
 
 	const { loading: toggleStarLoading, run: toggleStar } = useRequest(
@@ -61,6 +63,21 @@ const SurveyCard: FC<PropsType> = (props: PropsType) => {
 		}
 	);
 
+	const {loading: duplicateLoading, run:duplicate} = useRequest(
+		// async ()=>{
+		// 	const {data} = await duplicateSurveyService(_id)
+		// 	return data
+		// },
+		async () => await duplicateSurveyService(_id),
+		{
+			manual:true,
+			onSuccess(result){
+				message.success('已复制')
+				nav(`${EDIT_PATHNAME}/${result}`)
+			}
+		} 
+	)
+	
 	return (
 		<>
 			<div className={styles.container}>
@@ -97,14 +114,21 @@ const SurveyCard: FC<PropsType> = (props: PropsType) => {
 						</Button>
 					</Space>
 					<Space className={styles.right}>
+						{/* 收藏按钮 */}
 						<Button
 							icon={isStarState ? <StarFilled /> : <StarOutlined />}
 							onClick={toggleStar}
 							disabled={toggleStarLoading}
 						></Button>
 
-						<Button icon={<CopyOutlined />}></Button>
+						{/* 复制按钮 */}
+						<Button
+							icon={<CopyOutlined />}
+							onClick={duplicate}
+							disabled={duplicateLoading}
+						></Button>
 
+						{/* 删除按钮 */}
 						<Popconfirm
 							title="删除"
 							description="确认删除该问卷？"
