@@ -69,8 +69,9 @@ const Trash: FC = () => {
   const TableElem = <>
     <div>
       <Space>
+				{/* 恢复按钮 */}
         <Popconfirm
-          title="抹除"
+          title="恢复"
           description={<>确认恢复{selectedIds}？</>}
           onConfirm={confirmRecover}
           onCancel={cancelRecover}
@@ -79,6 +80,7 @@ const Trash: FC = () => {
           <Button type="primary" disabled={selectedIds.length === 0}>恢复</Button>
         </Popconfirm>     
 
+				{/* 抹除按钮 */}
         <Popconfirm
           title="抹除"
           description={<>是否彻底删除{JSON.stringify(selectedIds)}？</>}

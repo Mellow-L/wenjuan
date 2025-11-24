@@ -33,17 +33,25 @@ type PropsType = {
 const SurveyCard: FC<PropsType> = (props: PropsType) => {
 	const nav = useNavigate();
 	const { _id, title, isPublished, isStar, answerCount, createdAt } = props;
+  
+	const [isDeletedState,setIsDeletedState] = useState(false) 
 
+	const { loading:eraseLoading ,run:eraseSurvey } = useRequest(
+		async () => await updateSurveyService(_id,{isDelete:true}),
+		{
+			manual:true,
+			onSuccess(){
+				setIsDeletedState(true)
+				message.success(`已删除id为 ${_id} 的问卷`);
+			},
+			onError(e){
+				console.log(e);
+			}
+		}
+	)
 	const confirmDelete: PopconfirmProps["onConfirm"] = (e) => {
 		console.log(e);
-		message.success("已移入回收站");
-		// alert('yes')
-	};
-
-	const cancelDelete: PopconfirmProps["onCancel"] = (e) => {
-		console.log(e);
-		message.error("删除失败");
-		// alert('no')
+		eraseSurvey()
 	};
 
 
@@ -78,6 +86,8 @@ const SurveyCard: FC<PropsType> = (props: PropsType) => {
 		} 
 	)
 	
+	// 如果已删除 则不显示
+	if(isDeletedState) return null
 	return (
 		<>
 			<div className={styles.container}>
@@ -133,11 +143,10 @@ const SurveyCard: FC<PropsType> = (props: PropsType) => {
 							title="删除"
 							description="确认删除该问卷？"
 							onConfirm={confirmDelete}
-							onCancel={cancelDelete}
 							okText="确认"
 							cancelText="取消"
 						>
-							<Button icon={<DeleteOutlined />}></Button>
+							<Button icon={<DeleteOutlined />} disabled={eraseLoading}></Button>
 						</Popconfirm>
 					</Space>
 				</Space>
