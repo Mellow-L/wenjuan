@@ -55,5 +55,14 @@ module.exports = [
         errno: 0,
       }
     }
+  },
+  {
+    url:'/api/survey/:id', // 更新问卷信息
+    method: 'patch',
+    response(){
+      return{
+        errno:0
+      }
+    }
   }
 ]
