@@ -1,18 +1,21 @@
-import { useTitle } from "ahooks";
+import { useRequest, useTitle } from "ahooks";
 import React, { useEffect, type FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
 	Button,
 	Checkbox,
 	Form,
 	Input,
+	message,
 	Space,
 	Typography,
 	type FormProps,
 } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import styles from "../styles/Common.module.scss";
-import { REGISTER_PATHNAME } from "../router";
+import { MANAGE_LIST_PATHNAME, REGISTER_PATHNAME } from "../router";
+import { loginService } from "../services/user";
+import { setToken } from "../utils/user-token";
 const { Title } = Typography;
 
 const USERNAME_KEY = "USERNAME";
@@ -41,19 +44,7 @@ function getUser() {
 	};
 }
 
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-	console.log("Success:", values);
-	if (values.remember) {
-		console.log("记住账号密码");
-		storeUser(values.username, values.password);
-	} else {
-		clearStoredUser();
-	}
-};
 
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-	console.log("Failed:", errorInfo);
-};
 
 const Login: FC = () => {
 	const [form] = Form.useForm();
@@ -62,6 +53,41 @@ const Login: FC = () => {
 		form.setFieldsValue(storedInfo);
 	});
 	useTitle("登录");
+	const nav = useNavigate()
+	
+	const { loading:loginLoading, run: loginUser } = useRequest(
+		async (values)=>{
+			const { username, password} = values
+			const data = await loginService(username,password)
+			return data
+		},
+		{
+			manual:true,
+			onSuccess(result){
+				const { token = ''} = result
+				// JWT
+				setToken(token)
+				message.success('登录成功')
+				nav(MANAGE_LIST_PATHNAME)
+			}
+		}
+	)
+
+	const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
+		console.log("Success:", values);
+		loginUser(values)
+
+		if (values.remember) {
+			console.log("记住账号密码");
+			storeUser(values.username, values.password);
+		} else {
+			clearStoredUser();
+		}
+	};
+
+	const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
+		console.log("Failed:", errorInfo);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -112,7 +138,7 @@ const Login: FC = () => {
 
 				<Form.Item label={null}>
 					<Space>
-						<Button type="primary" htmlType="submit">
+						<Button type="primary" htmlType="submit" disabled={loginLoading}>
 							提交登录
 						</Button>
 						<Link to={REGISTER_PATHNAME}>没有账号？前去注册</Link>

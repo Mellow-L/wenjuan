@@ -1,5 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
+import { getToken } from "../utils/user-token";
 
 const myAxios = axios.create({
   timeout:10 * 1000,
@@ -17,6 +18,14 @@ myAxios.interceptors.response.use(
     }
     return data as any
   }
+)
+
+myAxios.interceptors.request.use(
+  request =>{  
+    request.headers['Authorization'] = `Bearer ${getToken()}`
+    return request
+  },
+  error => Promise.reject(error)
 )
 
 export default myAxios
