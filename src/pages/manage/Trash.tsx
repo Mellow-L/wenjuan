@@ -5,7 +5,7 @@ import { useRequest, useTitle } from "ahooks";
 import { Button, Empty, message, Popconfirm, Space, Spin, Table, Tag, Typography, type PopconfirmProps } from "antd";
 import useLoadSurveyListData from "../../hooks/useLoadSurveyListData";
 import SurveyFinder from "../../components/SurveyFinder";
-import { deleteSurveysService } from "../../services/survey";
+import { deleteSurveysService, updateSurveyService } from "../../services/survey";
 import ListPagination from "../../components/ListPagination";
 const { Title } = Typography;
 
@@ -32,32 +32,25 @@ const columns = [
 ];
 const Trash: FC = () => {
 	useTitle("问卷回收站");
-	const {data, loading} = useLoadSurveyListData({isDeleted:true})
+	const {data, loading, refresh} = useLoadSurveyListData({isDeleted:true})
   const {list = [],total = 0} = data || {}
   const [selectedIds,setSelectedIds] = useState<string[]>([])
 
-	const confirmErase: PopconfirmProps['onConfirm'] = (e) => {
-		console.log(e);
-		deleteSurveys()
-	};
-
-	const cancelErase: PopconfirmProps['onCancel'] = (e) => {
-		console.log(e);
-		message.error('抹除失败');
-		// alert('no')
-	};
-
-  const confirmRecover: PopconfirmProps['onConfirm'] = (e) => {
-		console.log(e);
-		message.success('恢复成功');
-		// alert('yes')
-	};
-
-	const cancelRecover: PopconfirmProps['onCancel'] = (e) => {
-		console.log(e);
-		message.error('恢复失败');
-		// alert('no')
-	};
+	const {run:recoverSurveyList} = useRequest(
+		async () => {
+			for(const id of selectedIds){
+				await updateSurveyService(id,{isDeleted: false})
+			}
+		},
+		{
+			manual: true,
+			debounceWait: 500, // 在这里作防抖处理 或者用 loading 状态限制按钮禁用状态
+			onSuccess(){
+				message.success('恢复成功')
+				refresh()
+			}
+		}
+	)
 
 	const {run: deleteSurveys} = useRequest(async () => await deleteSurveysService(selectedIds),{
 		manual:true,
@@ -66,15 +59,26 @@ const Trash: FC = () => {
 			setSelectedIds([])
 		}
 	})
+
+	const confirmErase: PopconfirmProps['onConfirm'] = (e) => {
+		console.log(e);
+		deleteSurveys()
+	};
+
+  const confirmRecover: PopconfirmProps['onConfirm'] = (e) => {
+		console.log(e);
+		recoverSurveyList()
+		message.success('恢复成功');
+		// alert('yes')
+	};
   const TableElem = <>
     <div>
       <Space>
 				{/* 恢复按钮 */}
         <Popconfirm
           title="恢复"
-          description={<>确认恢复{selectedIds}？</>}
+          description={<>确认恢复{JSON.stringify(selectedIds)}？</>}
           onConfirm={confirmRecover}
-          onCancel={cancelRecover}
           okText="确认"
           cancelText="取消">
           <Button type="primary" disabled={selectedIds.length === 0}>恢复</Button>
@@ -85,7 +89,6 @@ const Trash: FC = () => {
           title="抹除"
           description={<>是否彻底删除{JSON.stringify(selectedIds)}？</>}
           onConfirm={confirmErase}
-          onCancel={cancelErase}
           okText="确认"
           cancelText="取消">
           <Button danger disabled={selectedIds.length === 0}>彻底移除</Button> 

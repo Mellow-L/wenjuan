@@ -22,11 +22,11 @@ function useLoadSurveyListData (opt: Partial<OptionType> = {}) {
     return data
   }
    
-  const {data,loading,error} = useRequest(getSurveyList,{
+  const {data,loading,error,refresh} = useRequest(getSurveyList,{
     refreshDeps:[ searchParams ]
   })
 
-  return {data,loading,error}
+  return {data,loading,error,refresh}
 }
 
 export default useLoadSurveyListData
