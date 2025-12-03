@@ -1,12 +1,15 @@
 import React,{type FC} from "react";
 import {Outlet} from 'react-router-dom'
 import styles from './MainLayout.module.scss'
-import { Layout } from "antd";
+import { Layout, Spin } from "antd";
 import Logo from "../components/Logo";
-import UserInfo from "../components/UseInfo";
+import UserInfo from "../components/UserInfo";
+import useLoadUserData from "../hooks/useLoadUserData";
+import useAuthGuard from "../hooks/useAuthGuard";
 const {Header,Content,Footer} = Layout
 const MainLayout: FC = () => {
-
+  const {waitingUserData} = useLoadUserData()
+  useAuthGuard(waitingUserData)
   return (<>
     {/* <div className={styles.header}>header</div> */}
     {/* <div>
@@ -23,9 +26,16 @@ const MainLayout: FC = () => {
         </div>
       </Header>
 
-      <Content className={styles.main}>
-        <Outlet></Outlet>
-      </Content>
+      <Layout>
+        <Content className={styles.main}>
+          {waitingUserData ? 
+          <Spin tip="Loading" size="large">
+            <div style={{ minHeight: 100 }} />
+          </Spin> : 
+          <Outlet/>}
+        </Content>
+      </Layout>
+      
 
       <Footer className={styles.footer}>
         问卷调查工具 &copy; 2025 - present. Created by 林怡然

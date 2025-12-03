@@ -1,19 +1,21 @@
 import React,{type FC} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { LOGIN_PATHNAME } from '../router'
-import { useRequest } from 'ahooks'
-import { getUserInfoService } from '../services/user'
 import { UserOutlined } from '@ant-design/icons'
 import { Button, message } from 'antd'
 import { removeToken } from '../utils/user-token'
+import useGetUserInfo from '../hooks/useGetUserInfo'
+import { useDispatch } from 'react-redux'
+import { logoutReducer } from '../store/userSlice'
 
 const UserInfo: FC = () => {
-  // 自 动的 useRequest
-  const {data} = useRequest(getUserInfoService)
-  const { username, nickname } = data || {}
+  const dispatch = useDispatch()
+  const {username, nickname} = useGetUserInfo() //只从 store 中拿，不在这里发请求
+
   const nav = useNavigate()
   function logout(){
-    removeToken()
+    dispatch(logoutReducer()) //  清理用户的 store
+    removeToken() // 清理服务端返回的 token
     message.success('退出成功')
     nav(LOGIN_PATHNAME)
   }
@@ -30,7 +32,6 @@ const UserInfo: FC = () => {
   )
   return (
     <>
-      // 根据获取的用户信息来显示
       {username? CurrentUser: NoneUser}      
     </>
   )
