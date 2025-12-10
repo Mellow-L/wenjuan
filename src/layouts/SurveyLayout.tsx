@@ -9,7 +9,7 @@ const SurveyLayout: FC = () => {
   // 路由守卫
   useAuthGuard(waitingUserData)
   return (<>
-    <div>SurveyLayout</div>
+    {/* <div>SurveyLayout</div> */}
     <div style={{ height:'100vh'}}>
       {waitingUserData ? 
       <Spin tip="Loading" size="large">

@@ -3,6 +3,7 @@ import { useTitle } from "ahooks";
 import { Spin } from "antd";
 import useLoadSurveyData from "../../../hooks/useLoadSurveyData";
 import styles from './index.module.scss'
+import Canvas from "./Canvas";
 const Edit: FC = () => {
 	useTitle("问卷编辑器");
 	const {loading,data} = useLoadSurveyData()
@@ -14,7 +15,9 @@ const Edit: FC = () => {
 				<div className={styles.left}>left</div>
 				<div className={styles.main}>
 					<div className={styles['canvas-wrapper']}>
-						<div style={{height:'900px',  }}>滚动画布（测试）</div>
+						
+						<Canvas/>
+						<div style={{height:'900px',  backgroundColor:'#fff'}}>滚动画布（测试）</div>
 					</div>  
 				</div> 
 				<div className={styles.right}>right</div>

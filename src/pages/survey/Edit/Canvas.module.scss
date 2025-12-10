@@ -1,0 +1,19 @@
+.canvas{
+  min-height: 100%;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.component-wrapper{
+  margin:10px;
+  border: 2px dotted #fff;
+  padding:10px;
+  border-radius: 3px;
+  &:hover{
+    border-color: gray;
+  }
+}
+
+.component{
+  pointer-events: none;// 屏蔽鼠标行为
+}

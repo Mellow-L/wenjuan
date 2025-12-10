@@ -21,8 +21,7 @@ const SurveyTitle:FC<SurveyTitlePropsType> = (props:SurveyTitlePropsType) => {
 				level={level}
 				style={{
 					textAlign: isCenter ? "center" : "start",
-					fontSize: setFontSize(level),
-          marginBottom:'0'
+					fontSize: setFontSize(level)
 				}}
 			>
 				{text}
