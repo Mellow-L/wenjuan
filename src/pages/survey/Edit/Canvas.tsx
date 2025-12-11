@@ -50,7 +50,7 @@ const Canvas:FC<PropsType> = (props:PropsType) => {
 					onClick={(e) => handleClick(e,fe_id)}
 					style={{ 
             border: fe_id === selectedId ? "solid" : "" ,
-            borderColor: fe_id === selectedId ? "#f26ca1ff" : "" ,
+            borderColor: fe_id === selectedId ? "#f26ca2ab" : "" ,
           }}
 				>
 					<div className={styles.component}>{getComponentJSX(c)}</div>
@@ -58,21 +58,6 @@ const Canvas:FC<PropsType> = (props:PropsType) => {
 			);
     })}
   </div>)
-    
-  
-  
-  // return (<div className={styles.canvas}>
-  //   <div className={}>
-  //     <div className={}>
-  //       <SurveyTitle/>
-  //     </div>
-  //   </div>
-  //   <div className={styles['component-wrapper']}>
-  //     <div className={styles.component}>
-  //       <SurveyInput/>
-  //     </div>
-  //   </div>
-  // </div>)
 }
 
 export default Canvas

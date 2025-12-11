@@ -6,6 +6,7 @@ import styles from './index.module.scss'
 import Canvas from "./Canvas";
 import { useDispatch } from "react-redux";
 import { changeSelectedId } from "../../../store/componentsSlice";
+import LeftPanel from "./LeftPanel";
 const Edit: FC = () => {
 	const dispatch = useDispatch()
 	useTitle("问卷编辑器");
@@ -16,10 +17,12 @@ const Edit: FC = () => {
 	}
 	return (
 		<div className={styles.container}>
-			<div style={{ backgroundColor: "#ffffff", height: "50px" }}>header</div>
+			<div style={{ backgroundColor: "#ffffff", height: "30px" }}>header</div>
 			<div className={styles["content-wrapper"]}>
 				<div className={styles.content}>
-					<div className={styles.left}>left</div>
+					<div className={styles.left}>
+						<LeftPanel/>
+					</div>
 					<div className={styles.main} onClick={handleClick}>
 						<div className={styles["canvas-wrapper"]}>
 							<Canvas loading={loading} />

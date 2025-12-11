@@ -1,0 +1,13 @@
+.component-wrapper{
+  background-color:#f9f5f5ff;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover{
+    border: 1px dashed #b5b5b5
+  }
+}
+.component{
+  pointer-events: none;
+}

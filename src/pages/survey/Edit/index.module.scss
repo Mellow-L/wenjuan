@@ -11,13 +11,15 @@
 }
 
 .content{
-  margin:0 24px;
+  margin:0 16px;
   display: flex;
-  height: 100vh;
+  height: 100%;
   .left{
     width: 285px;
     background-color: #ffffff;
     padding:0 12px;
+    border-radius: 6px;
+    box-shadow: 2px 4px 15px #7c7c7c;
   }
   .main{
     flex:1; 
@@ -38,6 +40,8 @@
     width: 300px;
     background-color: #ffffff;
     padding:0 12px;
+    border-radius: 6px;
+    box-shadow: 2px 4px 15px #7c7c7c;
   }
 }
 
