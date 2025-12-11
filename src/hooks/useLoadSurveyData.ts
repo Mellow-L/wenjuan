@@ -21,7 +21,11 @@ function useLoadSurveyData(){
 	useEffect(()=>{
 		if(!surveyInfo) return
 		const {componentsList = []} = surveyInfo
-		dispatch(resetComponents({componentsList})) // 存入 store
+		let selectedId = '' 
+		if(componentsList.length > 0){
+			selectedId =  componentsList[0].fe_id
+		}
+		dispatch(resetComponents({componentsList,selectedId})) // 带着selectedId 存入 store
 	},[surveyInfo,dispatch]) // 监听surveyInfo新的返回 存入 store
 
 	useEffect(()=>{

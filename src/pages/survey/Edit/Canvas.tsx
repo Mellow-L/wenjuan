@@ -4,7 +4,8 @@ import styles from './Canvas.module.scss'
 import { Empty, Spin } from 'antd'
 import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
 import getComponentConfigByType from '../../../components/SurveyComponents'
-import type { ComponentInfoType } from '../../../store/componentsSlice'
+import { changeSelectedId, type ComponentInfoType } from '../../../store/componentsSlice'
+import { useDispatch } from 'react-redux'
 
 type PropsType = {
   loading:boolean
@@ -17,10 +18,16 @@ function getComponentJSX(componentInfo:ComponentInfoType){
   return <Component {...props}/>
 }
 const Canvas:FC<PropsType> = (props:PropsType) => {
+  const dispatch = useDispatch()
   const { loading } = props
-  const {componentsList} = useGetComponentsInfo()
-  console.log('componentList:',JSON.stringify(componentsList));
-
+  const {componentsList,selectedId} = useGetComponentsInfo() // 从 store 中拿
+  console.log('componentList, selectedId:',JSON.stringify(componentsList),selectedId);
+ 
+  function handleClick(e:MouseEvent,id:string){
+    e.stopPropagation() // 阻止 Canvas 的点击事件冒泡 至 Edit（触发其清除 selectedId）
+    console.log('选中组件');
+    dispatch(changeSelectedId(id))
+  }
   if(loading)return (<div>
     <Spin tip="Loading" size="large">
       <div style={{ minHeight: 100 }} />
@@ -36,11 +43,19 @@ const Canvas:FC<PropsType> = (props:PropsType) => {
       console.log('111进入 map');
       
       const {fe_id} = c
-      return (<div key={fe_id} className={styles['component-wrapper']}>
-        <div className={styles.component}> 
-          {getComponentJSX(c)}
-        </div>
-      </div>)
+      return (
+				<div
+					key={fe_id}
+					className={styles["component-wrapper"]}
+					onClick={(e) => handleClick(e,fe_id)}
+					style={{ 
+            border: fe_id === selectedId ? "solid" : "" ,
+            borderColor: fe_id === selectedId ? "#f26ca1ff" : "" ,
+          }}
+				>
+					<div className={styles.component}>{getComponentJSX(c)}</div>
+				</div>
+			);
     })}
   </div>)
     

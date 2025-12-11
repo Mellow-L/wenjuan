@@ -4,17 +4,23 @@ import { Spin } from "antd";
 import useLoadSurveyData from "../../../hooks/useLoadSurveyData";
 import styles from './index.module.scss'
 import Canvas from "./Canvas";
+import { useDispatch } from "react-redux";
+import { changeSelectedId } from "../../../store/componentsSlice";
 const Edit: FC = () => {
+	const dispatch = useDispatch()
 	useTitle("问卷编辑器");
 	const {loading} = useLoadSurveyData() // 加载当前问卷信息存入 store
-
+	function handleClick(){
+		// 点击 main 除画布外区域后取消选中组件（在 Canvas 的点击事件中 阻止冒泡）
+		dispatch(changeSelectedId('')) // 清除 selectedId
+	}
 	return (
 		<div className={styles.container}>
 			<div style={{ backgroundColor: "#ffffff", height: "50px" }}>header</div>
 			<div className={styles["content-wrapper"]}>
 				<div className={styles.content}>
 					<div className={styles.left}>left</div>
-					<div className={styles.main}>
+					<div className={styles.main} onClick={handleClick}>
 						<div className={styles["canvas-wrapper"]}>
 							<Canvas loading={loading} />
 							{/* <div style={{ height: "900px", backgroundColor: "#fff" }}>
