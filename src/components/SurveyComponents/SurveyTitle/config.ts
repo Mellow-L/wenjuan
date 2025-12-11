@@ -3,9 +3,9 @@ import { SurveyTitleDefaultProps } from './interface'
 
 export * from './interface'
 
-export default {
+export const SurveyTitleConfig = {
   title:'标题',
   type:'SurveyTitle',
-  SurveyTitle,
+  Component: SurveyTitle,
   defaultProps: SurveyTitleDefaultProps,
 }

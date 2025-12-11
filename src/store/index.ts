@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { userSlice, type UserStateType } from "./userSlice";
-import { componentsSlice } from "./componentsSlice";
+import { componentsSlice, type ComponentsStateType } from "./componentsSlice";
 
 export type StateType = {
   user:UserStateType
+  components:ComponentsStateType
 }
 export default configureStore({
   reducer:{

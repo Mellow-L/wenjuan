@@ -1,32 +1,63 @@
 import React, { type FC } from 'react'
 
 import styles from './Canvas.module.scss'
-import SurveyTitle from '../../../components/SurveyComponents/SurveyTitle'
-import SurveyInput from '../../../components/SurveyComponents/SurveyInput'
-import { Spin } from 'antd'
+import { Empty, Spin } from 'antd'
+import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
+import getComponentConfigByType from '../../../components/SurveyComponents'
+import type { ComponentInfoType } from '../../../store/componentsSlice'
 
 type PropsType = {
   loading:boolean
+}  
+function getComponentJSX(componentInfo:ComponentInfoType){
+  const {type,props} = componentInfo
+  const config = getComponentConfigByType(type)
+  if(!config) return null
+  const {Component} = config
+  return <Component {...props}/>
 }
 const Canvas:FC<PropsType> = (props:PropsType) => {
   const { loading } = props
+  const {componentsList} = useGetComponentsInfo()
+  console.log('componentList:',JSON.stringify(componentsList));
+
   if(loading)return (<div>
     <Spin tip="Loading" size="large">
       <div style={{ minHeight: 100 }} />
     </Spin>
   </div>)
+
+  if(componentsList.length === 0){
+    console.log('此问卷没有组件')
+    return (<div></div>)
+  } 
   return (<div className={styles.canvas}>
-    <div className={styles['component-wrapper']}>
-      <div className={styles.component}>
-        <SurveyTitle/>
-      </div>
-    </div>
-    <div className={styles['component-wrapper']}>
-      <div className={styles.component}>
-        <SurveyInput/>
-      </div>
-    </div>
+    {componentsList.map(c=>{
+      console.log('111进入 map');
+      
+      const {fe_id} = c
+      return (<div key={fe_id} className={styles['component-wrapper']}>
+        <div className={styles.component}> 
+          {getComponentJSX(c)}
+        </div>
+      </div>)
+    })}
   </div>)
+    
+  
+  
+  // return (<div className={styles.canvas}>
+  //   <div className={}>
+  //     <div className={}>
+  //       <SurveyTitle/>
+  //     </div>
+  //   </div>
+  //   <div className={styles['component-wrapper']}>
+  //     <div className={styles.component}>
+  //       <SurveyInput/>
+  //     </div>
+  //   </div>
+  // </div>)
 }
 
 export default Canvas

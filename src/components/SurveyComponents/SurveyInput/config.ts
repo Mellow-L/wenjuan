@@ -3,9 +3,9 @@ import { SurveyInputDefaultProps } from './interface'
 
 export * from './interface'
 
-export default {
+export const SurveyInputConfig = {
   title:'输入框',
   type:'SurveyInput',
-  SurveyInput,
+  Component: SurveyInput,
   defaultProps: SurveyInputDefaultProps,
 }

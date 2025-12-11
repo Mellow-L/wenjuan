@@ -6,7 +6,7 @@ import styles from './index.module.scss'
 import Canvas from "./Canvas";
 const Edit: FC = () => {
 	useTitle("问卷编辑器");
-	const {loading} = useLoadSurveyData() // 加载当前问卷信息
+	const {loading} = useLoadSurveyData() // 加载当前问卷信息存入 store
 
 	return (
 		<div className={styles.container}>
@@ -17,9 +17,9 @@ const Edit: FC = () => {
 					<div className={styles.main}>
 						<div className={styles["canvas-wrapper"]}>
 							<Canvas loading={loading} />
-							<div style={{ height: "900px", backgroundColor: "#fff" }}>
+							{/* <div style={{ height: "900px", backgroundColor: "#fff" }}>
 								滚动画布（测试）
-							</div>
+							</div> */}
 						</div>
 					</div>
 					<div className={styles.right}>right</div>
