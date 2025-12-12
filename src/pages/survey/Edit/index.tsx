@@ -1,6 +1,5 @@
 import React, { type FC } from "react";
 import { useTitle } from "ahooks";
-import { Spin } from "antd";
 import useLoadSurveyData from "../../../hooks/useLoadSurveyData";
 import styles from './index.module.scss'
 import Canvas from "./Canvas";

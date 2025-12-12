@@ -1,7 +1,7 @@
 import React, { type FC } from 'react'
 
 import styles from './Canvas.module.scss'
-import { Empty, Spin } from 'antd'
+import { Spin } from 'antd'
 import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
 import getComponentConfigByType from '../../../components/SurveyComponents'
 import { changeSelectedId, type ComponentInfoType } from '../../../store/componentsSlice'
@@ -21,7 +21,7 @@ const Canvas:FC<PropsType> = (props:PropsType) => {
   const dispatch = useDispatch()
   const { loading } = props
   const {componentsList,selectedId} = useGetComponentsInfo() // 从 store 中拿
-  console.log('componentList, selectedId:',JSON.stringify(componentsList),selectedId);
+  console.log('从 store 中拿到：componentList, selectedId:',JSON.stringify(componentsList),selectedId);
  
   function handleClick(e:MouseEvent,id:string){
     e.stopPropagation() // 阻止 Canvas 的点击事件冒泡 至 Edit（触发其清除 selectedId）
@@ -53,7 +53,9 @@ const Canvas:FC<PropsType> = (props:PropsType) => {
             borderColor: fe_id === selectedId ? "#f26ca2ab" : "" ,
           }}
 				>
-					<div className={styles.component}>{getComponentJSX(c)}</div>
+					<div className={styles.component}>
+            {getComponentJSX(c)}
+          </div>
 				</div>
 			);
     })}

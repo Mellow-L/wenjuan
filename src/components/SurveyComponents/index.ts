@@ -18,8 +18,15 @@ export type ComponentConfigType = {
 // 组件 config type 合集数组，用于查询
 const componentConfigList: ComponentConfigType[] = [SurveyInputConfig,SurveyTitleConfig]
 
+// 单个 config group 类型
+export type componentsConfigGroupType = {
+  groupId:string // group 唯一标识
+  groupName:string // group 名称
+  components:Array<ComponentConfigType>
+}
+
 // 组件 config 的 group（显示类、输入类、选择类等）
-export const componentConfigGroup = [
+export const componentConfigGroups :componentsConfigGroupType[] = [
   {
     groupId:'textGroup',
     groupName:'文本显示',
@@ -30,6 +37,7 @@ export const componentConfigGroup = [
     groupName:'填空类',
     components:[SurveyInputConfig],
   },
+  
 ]
 
 // 根据 type 获取组件 config
