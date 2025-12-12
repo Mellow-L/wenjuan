@@ -11,7 +11,8 @@ export type ComponentsPropsType = SurveyInputPropsType & SurveyTitlePropsType// 
 export type ComponentConfigType = {
   title:string
   type:string
-  Component: FC<ComponentsPropsType>  // 组件的 JSX
+  Component: FC<ComponentsPropsType>  // 组件的 画布 JSX
+  ComponentProp: FC<ComponentsPropsType> // 组件的 属性面板 JSX
   defaultProps:ComponentsPropsType // 组件 prop type 的联合类型
 }
 

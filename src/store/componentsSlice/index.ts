@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { ComponentsPropsType } from "../../components/SurveyComponents";
 
 export type ComponentInfoType = {
-  fe_id:string // 后端返回给前端 列表渲染用,也用于选中样式的标识
+  fe_id:string // 后端 MongoDb生成_id，前端生成 fe_id
   type:string // 组件类型  
   title:string //组件标题
   props:ComponentsPropsType // 组件内部 props
