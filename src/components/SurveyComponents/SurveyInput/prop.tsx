@@ -3,7 +3,7 @@ import type { SurveyInputPropsType } from './interface'
 import { Form, Input } from 'antd'
 
 const SurveyInputProp:FC<SurveyInputPropsType> = (props:SurveyInputPropsType) => {
-  const { title, placeholder} = props
+  const { title, placeholder, onChange} = props
   const [form] = Form.useForm()
   useEffect(()=>{
     form.setFieldsValue({
@@ -11,9 +11,19 @@ const SurveyInputProp:FC<SurveyInputPropsType> = (props:SurveyInputPropsType) =>
       placeholder,
     })
   },[title,placeholder,form])
-  return (
-		<Form layout="vertical" initialValues={{ title, placeholder }}>
-
+	function handleValuesChange(changedValues:any,allValues:any){ 
+		// console.log(form.getFieldsValue());
+		console.log('changed:',changedValues);
+		console.log('all:',allValues);
+		if(onChange)onChange(allValues)
+	} 
+  return (  
+		<Form 
+			form={form}
+			layout="vertical"
+			initialValues={{ title, placeholder }}
+			onValuesChange={handleValuesChange}
+		>
 			<Form.Item
 				label="输入框标题"
 				name="title"
@@ -34,4 +44,4 @@ const SurveyInputProp:FC<SurveyInputPropsType> = (props:SurveyInputPropsType) =>
 	); 
 }
 
-export default SurveyInputProp
+export default SurveyInputProp 

@@ -48,8 +48,19 @@ export const componentsSlice = createSlice({
       state.selectedId = newComponent.fe_id
       // changeSelectedId(newComponent.fe_id) 
       // return state
+    },
+    // 修改组件属性
+    changeComponentProps:(state:ComponentsStateType,action:PayloadAction< {fe_id: string, newProps:ComponentsPropsType} >)=>{
+      const {fe_id, newProps} = action.payload
+      const targetComponent = state.componentsList.find(c =>  c.fe_id === fe_id )
+      if(targetComponent){
+        targetComponent.props = {
+          ...targetComponent.props,
+          ...newProps
+        }
+      }
     }
   }
 })
 
-export const { resetComponents,changeSelectedId,addComponent } = componentsSlice.actions
+export const { resetComponents,changeSelectedId,addComponent,changeComponentProps } = componentsSlice.actions
