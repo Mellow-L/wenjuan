@@ -7,19 +7,20 @@
 
 .content-wrapper{
   flex: auto;
-  padding:12px 0;
+  // padding:12px 0;
 }
 
 .content{
-  margin:0 16px;
+  // margin:0 16px;
   display: flex;
   height: 100%;
   .left{
     width: 285px;
     background-color: #ffffff;
     padding:0 12px;
-    border-radius: 6px;
-    box-shadow: 2px 4px 15px #7c7c7c;
+    border-right: 1px solid #cac9c9;
+    // border-radius: 6px;
+    // box-shadow: 2px 4px 15px #7c7c7c;
   }
   .main{
     flex:1; 
@@ -33,15 +34,16 @@
       left:50%;
       transform: translateX(-50%) translateY(-50%);
       overflow:auto; // 内层滚动
-      box-shadow: 2px 4px 15px #7c7c7c; 
+      box-shadow: 2px 4px 15px #a9a9a9; 
     }  
   }
   .right{
     width: 300px;
     background-color: #ffffff;
     padding:0 12px;
-    border-radius: 6px;
-    box-shadow: 2px 4px 15px #7c7c7c;
+    border-left: 1px solid #cac9c9;
+    // border-radius: 6px;
+    // box-shadow: 2px 4px 15px #7c7c7c;
   }
 }
 

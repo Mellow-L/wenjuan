@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { changeSelectedId } from "../../../store/componentsSlice";
 import LeftPanel from "./LeftPanel";
 import RightPanel from "./RightPanel";
+import Header from "./Header";
 const Edit: FC = () => {
 	const dispatch = useDispatch()
 	useTitle("问卷编辑器");
@@ -17,7 +18,7 @@ const Edit: FC = () => {
 	}
 	return (
 		<div className={styles.container}>
-			<div style={{ backgroundColor: "#ffffff", height: "30px" }}>header</div>
+			<Header/>
 			<div className={styles["content-wrapper"]}>
 				<div className={styles.content}>
 					<div className={styles.left}>
