@@ -8,6 +8,7 @@ export type ComponentInfoType = {
   title:string //组件标题
   props:ComponentsPropsType // 组件内部 props
   isHidden:boolean // 组件是否被隐藏
+  isLocked:boolean // 组件是否被锁定
 }
 
 // 这个 slice 的 state type
@@ -78,6 +79,16 @@ export const componentsSlice = createSlice({
       state.selectedId = getNextSelectedId(fe_id,state.componentsList)
       const targetComponent = state.componentsList[index] 
       targetComponent.isHidden = !isHidden
+    },
+    // 锁定 or 解锁组件
+    toggleComponentLock:(
+      state:ComponentsStateType,
+      action:PayloadAction<{fe_id:string,isLocked:boolean}>
+    )=>{
+      const {fe_id,isLocked} = action.payload
+      const index = state.componentsList.findIndex(c => c.fe_id === fe_id)
+      const targetComponent = state.componentsList[index]
+      targetComponent.isLocked = !isLocked
     }
   }
 })
@@ -89,4 +100,5 @@ export const {
 	changeComponentProps,
 	deleteSelectedComponent,
   toggleComponentDisplay,
+  toggleComponentLock,
 } = componentsSlice.actions;

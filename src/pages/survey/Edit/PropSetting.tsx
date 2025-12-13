@@ -11,13 +11,21 @@ const NoProp:FC = ()=>{
     </div>
   )
 }
+const LockProp:FC = ()=>{
+  return ( 
+    <div style={{textAlign:'center'}}>
+      组件已锁定{'><'}
+    </div>
+  )
+}
 // 根据 state 中的 selectedId 来显示组件的 Prop.tsx
 const PropSetting:FC = () => {
   const dispatch = useDispatch()
   const {selectedComponentInfo} = useGetComponentsInfo() 
   if(JSON.stringify(selectedComponentInfo) === "{}")return <NoProp/>
   // 拿 store 中选中组件的 type 和 props
-  const {type,props,fe_id} = selectedComponentInfo as ComponentInfoType
+  const {type,props,fe_id,isLocked} = selectedComponentInfo as ComponentInfoType
+  if(isLocked)return <LockProp/>
   // 根据 type 找 config
   const config =  getComponentConfigByType(type)
   if(!config)return <NoProp/>

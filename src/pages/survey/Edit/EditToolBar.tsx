@@ -1,28 +1,42 @@
-import { BlockOutlined, CopyOutlined, DeleteOutlined, DownOutlined, EyeOutlined, RedoOutlined, UndoOutlined, UnlockOutlined, UpOutlined } from '@ant-design/icons'
+import { BlockOutlined, CopyOutlined, DeleteOutlined, DownOutlined, EyeInvisibleOutlined, EyeOutlined, LockFilled, RedoOutlined, UndoOutlined, UnlockOutlined, UpOutlined } from '@ant-design/icons'
 import { Button, message, Space, Tooltip } from 'antd'
 import React, { type FC } from 'react'
 import { useDispatch } from 'react-redux'
-import { deleteSelectedComponent, toggleComponentDisplay, type ComponentInfoType } from '../../../store/componentsSlice'
+import { deleteSelectedComponent, toggleComponentDisplay, toggleComponentLock, type ComponentInfoType } from '../../../store/componentsSlice'
 import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
 
 const EditToolBar:FC = () => {
   const dispatch = useDispatch()
   const {selectedId,selectedComponentInfo} = useGetComponentsInfo()
+  const {isHidden = false,isLocked = false} = selectedComponentInfo as ComponentInfoType
+  const typeofLock = isLocked? 'primary':'default'
+  const titleofLock = isLocked? '解锁':'锁定'
+  const titleofDisplay = isHidden? '显示':'隐藏'
   // 删除、然后选中上一个
   function handleDelete(){
     dispatch(deleteSelectedComponent())
   }
   function toggleDisplay(){
     if(selectedId === ''){
-      console.log('没有选中组件');
+      console.log('display 没有选中组件');
       message.error('未选中组件')
     }else{
-      const {isHidden} = selectedComponentInfo as ComponentInfoType
       dispatch(toggleComponentDisplay({
         fe_id: selectedId, // 工具栏控制 display 的目标是选中组件，左侧栏不同
         isHidden:isHidden
       }))
     }
+  }
+  function toggleLock(){
+    if(selectedId === ''){
+      console.log('lock 没有选中组件');
+      message.error('未选中组件')
+    }else{
+      dispatch(toggleComponentLock({
+        fe_id: selectedId, // 同理，工具栏控制 lock 的目标是选中组件，左侧栏不同
+        isLocked:isLocked
+      }))
+    }  
   }
   return (
     <Space>
@@ -30,14 +44,13 @@ const EditToolBar:FC = () => {
         <Button shape="circle" icon={<DeleteOutlined />} onClick={handleDelete}/>
       </Tooltip>
 
-      <Tooltip title="隐藏/显示">
-        <Button shape="circle" icon={<EyeOutlined />} onClick={()=>toggleDisplay()}/>
-        {/* :<EyeInvisibleOutlined /> */}
+      <Tooltip title={titleofDisplay}>
+        <Button shape="circle" icon={!isHidden ? <EyeInvisibleOutlined /> : <EyeOutlined /> } onClick={()=>toggleDisplay()}/>
+        {/* : */}
       </Tooltip>
 
-      <Tooltip title="锁定/解锁">
-        <Button shape="circle" icon={<UnlockOutlined />} />
-        {/* <LockFilled />  锁定时要填充的 */}
+      <Tooltip title={titleofLock}>
+        <Button shape="circle" type={typeofLock} icon={!isLocked ? <UnlockOutlined /> : <LockFilled />} onClick={toggleLock}/>
       </Tooltip>
 
       <Tooltip title="复制">
