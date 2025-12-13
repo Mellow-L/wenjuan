@@ -1,11 +1,13 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { ComponentsPropsType } from "../../components/SurveyComponents";
+import { getNextSelectedId } from "./utils";
 
 export type ComponentInfoType = {
   fe_id:string // 后端 MongoDb生成_id，前端生成 fe_id
   type:string // 组件类型  
   title:string //组件标题
   props:ComponentsPropsType // 组件内部 props
+  isHidden:boolean // 组件是否被隐藏
 }
 
 // 这个 slice 的 state type
@@ -49,7 +51,7 @@ export const componentsSlice = createSlice({
       // changeSelectedId(newComponent.fe_id) 
       // return state
     },
-    // 修改组件属性
+    // 修改选中组件属性
     changeComponentProps:(state:ComponentsStateType,action:PayloadAction< {fe_id: string, newProps:ComponentsPropsType} >)=>{
       const {fe_id, newProps} = action.payload
       const targetComponent = state.componentsList.find(c =>  c.fe_id === fe_id )
@@ -59,8 +61,32 @@ export const componentsSlice = createSlice({
           ...newProps
         }
       }
+    },
+    // 删除选中组件
+    deleteSelectedComponent:(state:ComponentsStateType)=>{
+      const index = state.componentsList.findIndex(c => c.fe_id === state.selectedId)
+      state.selectedId = getNextSelectedId(state.selectedId,state.componentsList)
+      state.componentsList.splice(index,1)
+    },
+    // 隐藏 or 显示组件 
+    toggleComponentDisplay:(
+      state:ComponentsStateType,
+      action:PayloadAction<{fe_id:string,isHidden:boolean}>
+    )=>{
+      const {fe_id,isHidden} = action.payload
+      const index = state.componentsList.findIndex(c => c.fe_id === fe_id)
+      state.selectedId = getNextSelectedId(fe_id,state.componentsList)
+      const targetComponent = state.componentsList[index] 
+      targetComponent.isHidden = !isHidden
     }
   }
 })
 
-export const { resetComponents,changeSelectedId,addComponent,changeComponentProps } = componentsSlice.actions
+export const {
+	resetComponents,
+	changeSelectedId,
+	addComponent,
+	changeComponentProps,
+	deleteSelectedComponent,
+  toggleComponentDisplay,
+} = componentsSlice.actions;

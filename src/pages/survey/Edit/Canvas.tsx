@@ -21,7 +21,7 @@ const Canvas:FC<PropsType> = (props:PropsType) => {
   const dispatch = useDispatch()
   const { loading } = props
   const {componentsList,selectedId} = useGetComponentsInfo() // 从 store 中拿
-  console.log('从 store 中拿到：componentList, selectedId:',JSON.stringify(componentsList),selectedId);
+  console.log('从 store 中拿到：componentsList, selectedId:',JSON.stringify(componentsList),selectedId);
  
   function handleClick(e:MouseEvent,id:string){
     e.stopPropagation() // 阻止 Canvas 的点击事件冒泡 至 Edit（触发其清除 selectedId）
@@ -42,7 +42,11 @@ const Canvas:FC<PropsType> = (props:PropsType) => {
     {componentsList.map(c=>{
       console.log('111进入 map');
       
-      const {fe_id} = c
+      const {fe_id,isHidden} = c
+      if(isHidden){
+        console.log(`隐藏了 id 为${fe_id} 的组件`);
+        return null // 隐藏的组件则不在画布上显示
+      } 
       return (
 				<div
 					key={fe_id}
