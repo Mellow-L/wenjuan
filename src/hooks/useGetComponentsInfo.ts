@@ -6,7 +6,8 @@ import type { ComponentsStateType } from "../store/componentsSlice"
 function useGetComponentsInfo(){
   const componentsInfo = useSelector<StateType>(state => state.components) as ComponentsStateType
   const {componentsList = [],selectedId = ''} = componentsInfo
-  return {componentsList,selectedId}
+  const selectedComponentInfo = componentsList.find(c => c.fe_id === selectedId) ?? {}
+  return {componentsList,selectedId,selectedComponentInfo}
 }
 
 export default useGetComponentsInfo

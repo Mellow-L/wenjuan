@@ -6,6 +6,7 @@ import Canvas from "./Canvas";
 import { useDispatch } from "react-redux";
 import { changeSelectedId } from "../../../store/componentsSlice";
 import LeftPanel from "./LeftPanel";
+import RightPanel from "./RightPanel";
 const Edit: FC = () => {
 	const dispatch = useDispatch()
 	useTitle("问卷编辑器");
@@ -30,7 +31,9 @@ const Edit: FC = () => {
 							</div> */}
 						</div>
 					</div>
-					<div className={styles.right}>right</div>
+					<div className={styles.right}>
+						<RightPanel/>
+					</div>
 				</div>
 			</div>
 		</div>
