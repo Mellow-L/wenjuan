@@ -2,12 +2,12 @@ import { BlockOutlined, CopyOutlined, DeleteOutlined, DownOutlined, EyeInvisible
 import { Button, message, Space, Tooltip } from 'antd'
 import React, { type FC } from 'react'
 import { useDispatch } from 'react-redux'
-import { deleteSelectedComponent, toggleComponentDisplay, toggleComponentLock, type ComponentInfoType } from '../../../store/componentsSlice'
+import { addComponent, copyComponentInfo, deleteSelectedComponent, toggleComponentDisplay, toggleComponentLock, type ComponentInfoType } from '../../../store/componentsSlice'
 import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
 
 const EditToolBar:FC = () => {
   const dispatch = useDispatch()
-  const {selectedId,selectedComponentInfo} = useGetComponentsInfo()
+  const {selectedId,selectedComponentInfo,copiedComponent} = useGetComponentsInfo()
   const {isHidden = false,isLocked = false} = selectedComponentInfo as ComponentInfoType
   const typeofLock = isLocked? 'primary':'default'
   const titleofLock = isLocked? '解锁':'锁定'
@@ -38,6 +38,22 @@ const EditToolBar:FC = () => {
       }))
     }  
   }
+  function copyComponent(){
+    if(selectedId){
+      dispatch(copyComponentInfo())
+      message.success('copied',0.3)
+    }else{
+      message.error('未选中组件',0.3)
+    }  
+  }
+  function pasteComponent(){
+    if(copiedComponent){
+      dispatch(addComponent(copiedComponent))
+      message.success('pasted',0.3)
+    }else{
+      message.error('尚未复制',0.3)
+    } 
+  }
   return (
     <Space>
       <Tooltip title="删除">
@@ -54,12 +70,12 @@ const EditToolBar:FC = () => {
       </Tooltip>
 
       <Tooltip title="复制">
-        <Button shape="circle" icon={<CopyOutlined />} />
+        <Button shape="circle" icon={<CopyOutlined />} onClick={copyComponent}/>
         {/* 弹窗 */}
       </Tooltip>
 
       <Tooltip title="粘贴">
-        <Button shape="circle" icon={<BlockOutlined />} />
+        <Button shape="circle" icon={<BlockOutlined />} onClick={pasteComponent}/>
       </Tooltip>
 
       <Tooltip title="上移">

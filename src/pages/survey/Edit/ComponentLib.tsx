@@ -20,7 +20,9 @@ const ComponentLib:FC = () => {
       fe_id: nanoid(),
       type, 
       title,
-      props: defaultProps
+      props: defaultProps,
+      isHidden:false,
+      isLocked:false
     }))
   }
 

@@ -1,7 +1,7 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, nanoid, type PayloadAction } from "@reduxjs/toolkit";
 import type { ComponentsPropsType } from "../../components/SurveyComponents";
 import { getNextSelectedId } from "./utils";
-
+import cloneDeep from 'lodash.clonedeep'
 export type ComponentInfoType = {
   fe_id:string // 后端 MongoDb生成_id，前端生成 fe_id
   type:string // 组件类型  
@@ -15,11 +15,13 @@ export type ComponentInfoType = {
 export type ComponentsStateType = {
   selectedId:string // 不是后端的返回
   componentsList: Array<ComponentInfoType>
+  copiedComponent: ComponentInfoType | null
 }
 
 const INIT_STATE: ComponentsStateType = {
   selectedId:'',
-  componentsList:[]
+  componentsList:[],
+  copiedComponent: null
 }
 export const componentsSlice = createSlice({
   name:'components', 
@@ -40,7 +42,10 @@ export const componentsSlice = createSlice({
     // 添加component
     addComponent:(state:ComponentsStateType,action:PayloadAction<ComponentInfoType>)=>{
       const {selectedId,componentsList} = state
-      const newComponent = action.payload
+      const newComponent = {
+        ... action.payload,
+        fe_id:nanoid()
+      } 
       const selectedIndex = componentsList.findIndex(c => c.fe_id === selectedId)
       if(selectedIndex < 0){
         // 没有选中，添加在末尾
@@ -89,6 +94,15 @@ export const componentsSlice = createSlice({
       const index = state.componentsList.findIndex(c => c.fe_id === fe_id)
       const targetComponent = state.componentsList[index]
       targetComponent.isLocked = !isLocked
+    },
+    // copy
+    copyComponentInfo:(state:ComponentsStateType)=>{
+      const {selectedId,componentsList} = state
+      const targetComponent = componentsList.find(c => c.fe_id === selectedId)
+      if(!targetComponent)return 
+      // state.copiedComponent = JSON.parse(JSON.stringify(targetComponent))
+      // state.copiedComponent = structuredClone(targetComponent)
+      state.copiedComponent = cloneDeep(targetComponent)
     }
   }
 })
@@ -101,4 +115,5 @@ export const {
 	deleteSelectedComponent,
   toggleComponentDisplay,
   toggleComponentLock,
+  copyComponentInfo
 } = componentsSlice.actions;
