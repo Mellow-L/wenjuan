@@ -103,7 +103,43 @@ export const componentsSlice = createSlice({
       // state.copiedComponent = JSON.parse(JSON.stringify(targetComponent))
       // state.copiedComponent = structuredClone(targetComponent)
       state.copiedComponent = cloneDeep(targetComponent)
-    }
+    },
+    // paste
+    pasteComponentInfo:(state:ComponentsStateType)=>{
+      const {selectedId,componentsList,copiedComponent} = state
+      if(copiedComponent === null)return
+      const newComponent = {
+        ... copiedComponent,
+        fe_id:nanoid()
+      } 
+      const selectedIndex = componentsList.findIndex(c => c.fe_id === selectedId)
+      if(selectedIndex < 0){
+        componentsList.push(newComponent)
+      }else{
+        componentsList.splice(selectedIndex + 1,0,newComponent)
+      }     
+      state.selectedId = newComponent.fe_id
+    },
+    // 选中上一个
+    selectPrevComponent:(state:ComponentsStateType)=>{
+      const selectedIndex = state.componentsList.findIndex(c => c.fe_id === state.selectedId)
+      if(selectedIndex <= 0){
+        return
+      }else{
+        state.selectedId = state.componentsList[selectedIndex - 1].fe_id
+      }
+    },
+    // 选中下一个
+    selectFollowingComponent:(state:ComponentsStateType)=>{
+      const selectedIndex = state.componentsList.findIndex(c => c.fe_id === state.selectedId)
+      if(selectedIndex < 0){
+        return
+      }else if(selectedIndex === state.componentsList.length - 1){
+        return
+      }else{
+        state.selectedId = state.componentsList[selectedIndex + 1].fe_id
+      }
+    },
   }
 })
 
@@ -115,5 +151,8 @@ export const {
 	deleteSelectedComponent,
   toggleComponentDisplay,
   toggleComponentLock,
-  copyComponentInfo
+  copyComponentInfo,
+  pasteComponentInfo,
+  selectPrevComponent,
+  selectFollowingComponent
 } = componentsSlice.actions;

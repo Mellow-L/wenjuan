@@ -2,7 +2,7 @@ import { BlockOutlined, CopyOutlined, DeleteOutlined, DownOutlined, EyeInvisible
 import { Button, message, Space, Tooltip } from 'antd'
 import React, { type FC } from 'react'
 import { useDispatch } from 'react-redux'
-import { addComponent, copyComponentInfo, deleteSelectedComponent, toggleComponentDisplay, toggleComponentLock, type ComponentInfoType } from '../../../store/componentsSlice'
+import { addComponent, copyComponentInfo, deleteSelectedComponent, pasteComponentInfo, toggleComponentDisplay, toggleComponentLock, type ComponentInfoType } from '../../../store/componentsSlice'
 import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
 
 const EditToolBar:FC = () => {
@@ -41,17 +41,17 @@ const EditToolBar:FC = () => {
   function copyComponent(){
     if(selectedId){
       dispatch(copyComponentInfo())
-      message.success('copied',0.3)
+      // message.success('copied',0.3)
     }else{
-      message.error('未选中组件',0.3)
+      // message.error('未选中组件',0.3)
     }  
   }
   function pasteComponent(){
     if(copiedComponent){
-      dispatch(addComponent(copiedComponent))
-      message.success('pasted',0.3)
+      dispatch(pasteComponentInfo())
+      // message.success('pasted',0.3)
     }else{
-      message.error('尚未复制',0.3)
+      // message.error('尚未复制',0.3)
     } 
   }
   return (

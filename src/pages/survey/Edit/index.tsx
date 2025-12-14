@@ -27,9 +27,6 @@ const Edit: FC = () => {
 					<div className={styles.main} onClick={handleClick}>
 						<div className={styles["canvas-wrapper"]}>
 							<Canvas loading={loading} />
-							{/* <div style={{ height: "900px", backgroundColor: "#fff" }}>
-								滚动画布（测试）
-							</div> */}
 						</div>
 					</div>
 					<div className={styles.right}>

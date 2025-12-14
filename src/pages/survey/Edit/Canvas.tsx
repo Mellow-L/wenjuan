@@ -6,6 +6,7 @@ import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
 import getComponentConfigByType from '../../../components/SurveyComponents'
 import { changeSelectedId, type ComponentInfoType } from '../../../store/componentsSlice'
 import { useDispatch } from 'react-redux'
+import useBindCanvasKeyPress from '../../../hooks/useBindCanvasKeyPress'
 
 type PropsType = {
   loading:boolean
@@ -18,6 +19,8 @@ function getComponentJSX(componentInfo:ComponentInfoType){
   return <Component {...props}/>
 }
 const Canvas:FC<PropsType> = (props:PropsType) => {
+  useBindCanvasKeyPress()
+
   const dispatch = useDispatch()
   const { loading } = props
   const {componentsList,selectedId} = useGetComponentsInfo() // 从 store 中拿
