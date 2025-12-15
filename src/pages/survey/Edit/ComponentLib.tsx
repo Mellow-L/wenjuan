@@ -47,19 +47,19 @@ const ComponentLib:FC = () => {
     })
   }
   return (
-    <>
-    {componentConfigGroups.map((g, index) => {
-      const { groupId,groupName,components } = g
-      return (
-				<div key={groupId}>
-					<Title level={5} style={{ marginTop: index === 0 ? "0" : "" }}>
-						{groupName}
-					</Title>
-          {showComponents(components ||[])}
-				</div>
-			);
-    })}
-    </>
+    <div className={styles['lib-wrapper']}>
+      {componentConfigGroups.map((g, index) => {
+        const { groupId,groupName,components } = g
+        return (
+          <div key={groupId}>
+            <Title level={5} style={{ marginTop: index === 0 ? "0" : "" }}>
+              {groupName}
+            </Title>
+            {showComponents(components ||[])}
+          </div>
+        );
+      })}
+    </div>
   )
 }
 
