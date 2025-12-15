@@ -4,6 +4,7 @@ import { SurveyTitleConfig, type SurveyTitlePropsType } from './SurveyTitle/conf
 import { SurveyParagraphConfig, type SurveyParagraphPropsType } from './SurveyParagraph/config';
 import { SurveyInfoConfig, type SurveyInfoPropsType } from './SurveyInfo/config';
 import { SurveyInputParaConfig, type SurveyInputParaPropsType } from './SurveyInputPara/config';
+import { SurveySelectRadioConfigType } from "./SurveySelectRadio/config";
 
 // 各个组件的 props type
 export type ComponentsPropsType = 
@@ -29,6 +30,7 @@ const componentConfigList: ComponentConfigType<any>[] = [
 	SurveyParagraphConfig,
 	SurveyInfoConfig,
 	SurveyInputParaConfig,
+  SurveySelectRadioConfigType,
 ];
 
 // 单个 config group 类型
@@ -50,7 +52,11 @@ export const componentConfigGroups :componentsConfigGroupType[] = [
     groupName:'填空类问题',
     components:[SurveyInputConfig,SurveyInputParaConfig],
   },
-  
+  {
+    groupId:'selectGroup',
+    groupName:'填空类问题',
+    components:[SurveySelectRadioConfigType],
+  },
 ]
 
 // 根据 type 获取组件 config

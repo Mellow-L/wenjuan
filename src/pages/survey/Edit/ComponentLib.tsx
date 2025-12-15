@@ -12,7 +12,7 @@ const ComponentLib:FC = () => {
   
   const dispatch = useDispatch()
 
-  function add(c:ComponentConfigType){
+  function add(c:ComponentConfigType<any>){
     console.log('函数调用：添加组件');
     
     const {type,title,defaultProps} = c
@@ -26,7 +26,7 @@ const ComponentLib:FC = () => {
     }))
   }
 
-  function showComponents(components:Array<ComponentConfigType>){
+  function showComponents(components:Array<ComponentConfigType<any>>){
     console.log('函数调用：组件库显示 group 中组件');
     
     if(components.length === 0){

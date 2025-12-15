@@ -8,7 +8,7 @@ const SurveyInputPara:FC<SurveyInputParaPropsType> = (props:SurveyInputParaProps
   return (
     <div>
       <Paragraph strong>{title}</Paragraph>
-      <TextArea placeholder={placeholder}/>
+      <TextArea placeholder={placeholder} rows={3}/>
     </div>
   )
 }
