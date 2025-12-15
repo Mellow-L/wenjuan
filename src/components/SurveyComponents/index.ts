@@ -4,7 +4,8 @@ import { SurveyTitleConfig, type SurveyTitlePropsType } from './SurveyTitle/conf
 import { SurveyParagraphConfig, type SurveyParagraphPropsType } from './SurveyParagraph/config';
 import { SurveyInfoConfig, type SurveyInfoPropsType } from './SurveyInfo/config';
 import { SurveyInputParaConfig, type SurveyInputParaPropsType } from './SurveyInputPara/config';
-import { SurveySelectRadioConfigType } from "./SurveySelectRadio/config";
+import { SurveySelectCheckboxConfig, type SurveySelectCheckboxPropsType } from "./SurveySelectCheckbox/config";
+import { SurveySelectRadioConfig, type SurveySelectRadioPropsType } from "./SurveyRadio/config";
 
 // 各个组件的 props type
 export type ComponentsPropsType = 
@@ -12,7 +13,9 @@ export type ComponentsPropsType =
   SurveyInputParaPropsType &
 	SurveyTitlePropsType &
 	SurveyParagraphPropsType &
-	SurveyInfoPropsType;// TODO:理解 &替换｜ 
+	SurveyInfoPropsType&
+  SurveySelectRadioPropsType&
+  SurveySelectCheckboxPropsType// TODO:理解 &替换｜ 
 
 // 各个组件的 config type，对应各个 config.ts
 export type ComponentConfigType<T> = {
@@ -30,7 +33,8 @@ const componentConfigList: ComponentConfigType<any>[] = [
 	SurveyParagraphConfig,
 	SurveyInfoConfig,
 	SurveyInputParaConfig,
-  SurveySelectRadioConfigType,
+  SurveySelectRadioConfig,
+  SurveySelectCheckboxConfig
 ];
 
 // 单个 config group 类型
@@ -54,8 +58,8 @@ export const componentConfigGroups :componentsConfigGroupType[] = [
   },
   {
     groupId:'selectGroup',
-    groupName:'填空类问题',
-    components:[SurveySelectRadioConfigType],
+    groupName:'选择类问题',
+    components:[SurveySelectRadioConfig,SurveySelectCheckboxConfig],
   },
 ]
 

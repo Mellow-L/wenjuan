@@ -5,7 +5,7 @@ import SurveySelectRadioProp from './prop'
 
 export * from './interface'
 
-export const SurveySelectRadioConfigType:ComponentConfigType<SurveySelectRadioPropsType> = {
+export const SurveySelectRadioConfig:ComponentConfigType<SurveySelectRadioPropsType> = {
   title:'单选标题',
   type:'SurveySelectRadio',
   Component:SurveySelectRadio,

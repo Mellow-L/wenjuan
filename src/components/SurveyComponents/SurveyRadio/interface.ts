@@ -19,5 +19,5 @@ export const SurveySelectRadioDefaultProps:SurveySelectRadioPropsType = {
     {value:'default item2',label:'选项 2'},
     {value:'default item3',label:'选项 3'},
   ],
-  value:''
+  value:'default item1'
 }
