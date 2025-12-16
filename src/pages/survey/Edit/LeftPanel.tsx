@@ -2,6 +2,7 @@ import { BuildOutlined, ProfileOutlined } from '@ant-design/icons'
 import { Tabs, type TabsProps } from 'antd'
 import React, { type FC } from 'react'
 import ComponentLib from './ComponentLib'
+import Layer from './Layer'
 
 const LeftPanel:FC = () => {
   const items:TabsProps['items'] = [
@@ -13,7 +14,7 @@ const LeftPanel:FC = () => {
     {
       key:'2',
       label:(<><ProfileOutlined /> 图层</>),
-      children:<div>显示图层</div>,
+      children:<Layer/>,
     }
   ]
   return (

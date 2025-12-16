@@ -140,6 +140,12 @@ export const componentsSlice = createSlice({
         state.selectedId = state.componentsList[selectedIndex + 1].fe_id
       }
     },
+    // 改变组件标题
+    changeComponentTitle:(state,actions:PayloadAction<{ fe_id: string, title: string }>)=>{
+      const {fe_id,title} = actions.payload
+      const targetComponent = state.componentsList.find(c => c.fe_id === fe_id)
+      if(targetComponent)targetComponent.title = title
+    }
   }
 })
 
@@ -154,5 +160,6 @@ export const {
   copyComponentInfo,
   pasteComponentInfo,
   selectPrevComponent,
-  selectFollowingComponent
+  selectFollowingComponent,
+  changeComponentTitle
 } = componentsSlice.actions;

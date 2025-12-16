@@ -1,7 +1,7 @@
 import React, { type FC } from 'react'
 
 import styles from './Canvas.module.scss'
-import { Spin } from 'antd'
+import { message, Spin } from 'antd'
 import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
 import getComponentConfigByType from '../../../components/SurveyComponents'
 import { changeSelectedId, type ComponentInfoType } from '../../../store/componentsSlice'
@@ -25,7 +25,6 @@ const Canvas:FC<PropsType> = (props:PropsType) => {
   const { loading } = props
   const {componentsList,selectedId} = useGetComponentsInfo() // 从 store 中拿
   console.log('从 store 中拿到：componentsList, selectedId:',JSON.stringify(componentsList),selectedId);
- 
   function handleClick(e:MouseEvent,id:string){
     e.stopPropagation() // 阻止 Canvas 的点击事件冒泡 至 Edit（触发其清除 selectedId）
     console.log('选中组件');

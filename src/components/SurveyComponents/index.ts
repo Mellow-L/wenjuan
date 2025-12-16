@@ -5,7 +5,7 @@ import { SurveyParagraphConfig, type SurveyParagraphPropsType } from './SurveyPa
 import { SurveyInfoConfig, type SurveyInfoPropsType } from './SurveyInfo/config';
 import { SurveyInputParaConfig, type SurveyInputParaPropsType } from './SurveyInputPara/config';
 import { SurveySelectCheckboxConfig, type SurveySelectCheckboxPropsType } from "./SurveySelectCheckbox/config";
-import { SurveySelectRadioConfig, type SurveySelectRadioPropsType } from "./SurveyRadio/config";
+import { SurveySelectRadioConfig, type SurveySelectRadioPropsType } from "./SurveySelectRadio/config";
 
 // 各个组件的 props type
 export type ComponentsPropsType = 

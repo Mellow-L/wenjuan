@@ -1,0 +1,27 @@
+.wrapper{
+  padding: 6px;
+  display: flex;
+  border-bottom: 1px solid #eaeaea;
+  .title{
+    flex: auto;
+    line-height: 2;
+  }
+  .selected{
+    color: #f26ca1ff;
+  }
+  .handler{
+    text-align: end;
+
+    .btn {
+      opacity: .2;
+    }
+  }
+  &:hover {
+    .handler {
+      .btn {
+        opacity: 1;
+      }
+    }
+  }
+}
+

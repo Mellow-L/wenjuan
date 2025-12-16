@@ -2,7 +2,7 @@ import { BlockOutlined, CopyOutlined, DeleteOutlined, DownOutlined, EyeInvisible
 import { Button, message, Space, Tooltip } from 'antd'
 import React, { type FC } from 'react'
 import { useDispatch } from 'react-redux'
-import { addComponent, copyComponentInfo, deleteSelectedComponent, pasteComponentInfo, toggleComponentDisplay, toggleComponentLock, type ComponentInfoType } from '../../../store/componentsSlice'
+import { copyComponentInfo, deleteSelectedComponent, pasteComponentInfo, toggleComponentDisplay, toggleComponentLock, type ComponentInfoType } from '../../../store/componentsSlice'
 import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
 
 const EditToolBar:FC = () => {
