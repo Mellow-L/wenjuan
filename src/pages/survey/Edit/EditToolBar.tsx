@@ -10,8 +10,8 @@ const EditToolBar:FC = () => {
   const {selectedId,selectedComponentInfo,copiedComponent} = useGetComponentsInfo()
   const {isHidden = false,isLocked = false} = selectedComponentInfo as ComponentInfoType
   const typeofLock = isLocked? 'primary':'default'
-  const titleofLock = isLocked? '解锁':'锁定'
-  const titleofDisplay = isHidden? '显示':'隐藏'
+  const titleofLock = isLocked? '当前已锁定':'当前未锁定'
+  const titleofDisplay = isHidden? '当前已隐藏':'当前未隐藏'
   // 删除、然后选中上一个
   function handleDelete(){
     dispatch(deleteSelectedComponent())
@@ -61,7 +61,7 @@ const EditToolBar:FC = () => {
       </Tooltip>
 
       <Tooltip title={titleofDisplay}>
-        <Button shape="circle" icon={!isHidden ? <EyeInvisibleOutlined /> : <EyeOutlined /> } onClick={()=>toggleDisplay()}/>
+        <Button shape="circle" icon={!isHidden ?  <EyeOutlined /> : <EyeInvisibleOutlined />} onClick={()=>toggleDisplay()}/>
         {/* : */}
       </Tooltip>
 

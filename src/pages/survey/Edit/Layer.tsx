@@ -46,6 +46,7 @@ const Layer:FC = () => {
           [selectedClassName]:fe_id === selectedId
         })
         const typeofLock = isLocked? 'primary':'default'
+        const typeofHidden = isHidden? 'primary':'default'
         function toggleDisplay(){
           dispatch(toggleComponentDisplay({
             fe_id,
@@ -79,7 +80,8 @@ const Layer:FC = () => {
 							<Space direction="horizontal">
 								<Button
 									shape="circle"
-									icon={!isHidden ? <EyeInvisibleOutlined /> : <EyeOutlined />}
+									type={typeofHidden}
+									icon={!isHidden ?  <EyeOutlined />: <EyeInvisibleOutlined />}
 									onClick={() => toggleDisplay()}
 								/>
 								<Button
