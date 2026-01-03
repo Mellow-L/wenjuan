@@ -2,23 +2,33 @@ import { ControlOutlined, SettingOutlined } from '@ant-design/icons'
 import { Tabs, type TabsProps } from 'antd'
 import React, { type FC } from 'react'
 import PropSetting from './PropSetting'
+import PageSetting from './PageSetting'
+import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
 
 const RightPanel:FC = () => {
+  // const [activeKey,setActiveKey] = useState('prop')
+  const {selectedId} = useGetComponentsInfo()
+  // useEffect(()=>{
+  //   setActiveKey('prop')
+  //   if(selectedId)setActiveKey('prop')
+  //   else setActiveKey('setting')
+  // },[selectedId])
   const items:TabsProps['items'] = [
     {
-      key:'1',
+      key:'prop',
       label:(<><ControlOutlined /> 组件属性</>),
       children:<PropSetting/>,
     },
     {
-      key:'2',
+      key:'setting',
       label:(<><SettingOutlined /> 问卷设置</>),
-      children:<div>问卷设置</div>,
+      children:<PageSetting/>
     }
   ]
   return (
     <Tabs
-      defaultActiveKey='1'
+      defaultActiveKey='prop'
+      // activeKey={activeKey}
       centered
       items={items}
     />

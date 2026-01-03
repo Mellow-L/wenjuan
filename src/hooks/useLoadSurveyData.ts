@@ -4,8 +4,9 @@ import { useRequest } from "ahooks";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { resetComponents } from "../store/componentsSlice";
+import { resetSurveyInfo } from "../store/surveyInfoSlice";
 
-// 获取并加载某 id 问卷数据 存入 store（包含 survey 的 id，title，componentsList
+// 获取并加载某 id 问卷数据 存入 store（包含 survey 的 id，title，componentsList,以及 surveyInfo
 function useLoadSurveyData(){ 
   const { id = "" } = useParams();
 	const dispatch = useDispatch()
@@ -20,12 +21,13 @@ function useLoadSurveyData(){
 
 	useEffect(()=>{
 		if(!surveyInfo) return
-		const {componentsList = []} = surveyInfo
+		const {componentsList = [],title = '',desc = '',js = '',css = ''} = surveyInfo
 		let selectedId = '' 
 		if(componentsList.length > 0){
 			selectedId =  componentsList[0].fe_id
 		}
-		dispatch(resetComponents({componentsList,selectedId})) // 带着selectedId 存入 store
+		dispatch(resetComponents({componentsList,selectedId,copiedComponent:null})) // 带着selectedId 存入 store
+		dispatch(resetSurveyInfo({title,desc,js,css}))
 	},[surveyInfo,dispatch]) // 监听surveyInfo新的返回 存入 store
 
 	useEffect(()=>{
