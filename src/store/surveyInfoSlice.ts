@@ -20,8 +20,11 @@ export const surveyInfoSlice = createSlice({
   reducers: {
     resetSurveyInfo:(state:surveyInfoStateType,action:PayloadAction<surveyInfoStateType>)=>{
       return action.payload
+    },  
+    changeSurveyTitle:(state:surveyInfoStateType,action:PayloadAction<string>)=>{
+      state.title = action.payload
     }
   },
 })
 
-export const {resetSurveyInfo} = surveyInfoSlice.actions
+export const {resetSurveyInfo,changeSurveyTitle} = surveyInfoSlice.actions
