@@ -1,4 +1,4 @@
-import React, { useState, type ChangeEvent, type FC } from 'react'
+import React, { useEffect, useState, type ChangeEvent, type FC } from 'react'
 import styles from './Header.module.scss'
 import { Button, Input, Space } from 'antd'
 import { EditOutlined, LeftOutlined, LoadingOutlined} from '@ant-design/icons'
@@ -9,7 +9,7 @@ import useGetSurveyInfo from '../../../hooks/useGetSurveyInfo'
 import { useDispatch } from 'react-redux'
 import { changeSurveyTitle } from '../../../store/surveyInfoSlice'
 import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
-import { useKeyPress, useRequest } from 'ahooks'
+import { useDebounceEffect, useKeyPress, useRequest } from 'ahooks'
 import { updateSurveyService } from '../../../services/survey'
 const {Title} = Typography
 
@@ -42,17 +42,27 @@ const SaveButton:FC = () => {
   const {id} = useParams()
   const surveyInfo = useGetSurveyInfo()
   const {componentsList = []} = useGetComponentsInfo()
-  useKeyPress(['ctrl.s','meta.s'],(e:KeyboardEvent)=>{
-    e.preventDefault() // 禁用浏览器默认保存
-    if(!loading)save() 
-  })
-
   const {loading,run:save} = useRequest(async ()=>{
     if(!id)return
     await updateSurveyService(id,{...surveyInfo,componentsList})
   },{
     manual:true 
   })
+
+  useKeyPress(['ctrl.s','meta.s'],(e:KeyboardEvent)=>{
+    e.preventDefault() // 禁用浏览器默认保存
+    if(!loading)save() 
+  })
+
+  useDebounceEffect(
+    ()=>{
+      save()
+    },
+    [componentsList,surveyInfo],
+    {
+      wait:2000,
+    }
+  )
   return (
 		<Button
       onClick={save}
