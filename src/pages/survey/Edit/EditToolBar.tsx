@@ -4,6 +4,7 @@ import React, { type FC } from 'react'
 import { useDispatch } from 'react-redux'
 import { copyComponentInfo, deleteSelectedComponent, moveComponent, pasteComponentInfo, toggleComponentDisplay, toggleComponentLock, type ComponentInfoType } from '../../../store/componentsSlice'
 import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
+import { ActionCreators } from 'redux-undo'
 
 const EditToolBar:FC = () => {
   const dispatch = useDispatch()
@@ -64,6 +65,12 @@ const EditToolBar:FC = () => {
   function moveDown(){
     dispatch(moveComponent({oldIndex:selectedIndex,newIndex:selectedIndex + 1}))
   }
+  function undo(){
+    dispatch(ActionCreators.undo())
+  }
+  function redo(){
+    dispatch(ActionCreators.redo())
+  }
   return (
     <Space>
       <Tooltip title="删除">
@@ -97,11 +104,11 @@ const EditToolBar:FC = () => {
       </Tooltip>
 
       <Tooltip title="撤销">
-        <Button shape="circle" icon={<UndoOutlined />} />
+        <Button shape="circle" icon={<UndoOutlined />} onClick={undo}/>
       </Tooltip>
 
       <Tooltip title="重做">
-        <Button shape="circle" icon={<RedoOutlined />} />
+        <Button shape="circle" icon={<RedoOutlined />} onClick={redo}/>
       </Tooltip>
     </Space> 
   )
