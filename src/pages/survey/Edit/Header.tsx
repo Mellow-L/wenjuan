@@ -1,6 +1,6 @@
 import React, { useEffect, useState, type ChangeEvent, type FC } from 'react'
 import styles from './Header.module.scss'
-import { Button, Input, Space } from 'antd'
+import { Button, Input, message, Space } from 'antd'
 import { EditOutlined, LeftOutlined, LoadingOutlined} from '@ant-design/icons'
 import { useNavigate, useParams } from 'react-router-dom'
 import {Typography} from 'antd'
@@ -11,6 +11,7 @@ import { changeSurveyTitle } from '../../../store/surveyInfoSlice'
 import useGetComponentsInfo from '../../../hooks/useGetComponentsInfo'
 import { useDebounceEffect, useKeyPress, useRequest } from 'ahooks'
 import { updateSurveyService } from '../../../services/survey'
+import { STAT_PATHNAME } from '../../../router'
 const {Title} = Typography
 
 const TitleElem:FC = () => {
@@ -75,7 +76,34 @@ const SaveButton:FC = () => {
 	);
 }
 const PublishButton:FC = () => {
-  return <Button type='primary'>发布</Button>
+  const nav = useNavigate()
+  const {id} = useParams()
+  const surveyInfo = useGetSurveyInfo()
+  const {componentsList = []} = useGetComponentsInfo()
+  const {loading,run:publish} = useRequest(async ()=>{
+    if(!id)return
+    await updateSurveyService(id, {
+			...surveyInfo,
+			componentsList,
+			isPublished: true, // 发布标志
+		});
+  },{
+    manual:true ,
+    onSuccess(){
+      message.success('发布成功')
+      nav(`${STAT_PATHNAME}/${id}`) // 发布后跳转统计页
+    }
+  })
+  return (
+		<Button
+			type="primary"
+			onClick={publish}
+			disabled={loading}
+			icon={loading ? <LoadingOutlined /> : null}
+		>
+			发布
+		</Button>
+	);
 }
 const Header:FC = () => {
   const nav = useNavigate()
