@@ -4,7 +4,11 @@ import { copyComponentInfo, deleteSelectedComponent, pasteComponentInfo, selectF
 
 function isActiveElementValid(){
   const activeElem = document.activeElement
+  // if(activeElem === document.body)return true 
+
+  // 修复因 dnd-kit 加入导致的 useBindKeyPress 绑定快捷键失效问题
   if(activeElem === document.body)return true 
+  if(activeElem?.matches('div[role="button"]'))return true  
 }
 function useBindCanvasKeyPress() {
   const dispatch = useDispatch()

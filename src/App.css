@@ -1,0 +1,4 @@
+/* 修复因 dnd-kit 加入导致的 useBindKeyPress 绑定快捷键失效问题 */
+div[role="button"]{
+  outline: 0;
+}
