@@ -2,6 +2,7 @@ import { createSlice, nanoid, type PayloadAction } from "@reduxjs/toolkit";
 import type { ComponentsPropsType } from "../../components/SurveyComponents";
 import { getNextSelectedId } from "./utils";
 import cloneDeep from 'lodash.clonedeep'
+import { arrayMove } from "@dnd-kit/sortable";
 export type ComponentInfoType = {
   fe_id:string // 后端 MongoDb生成_id，前端生成 fe_id
   type:string // 组件类型  
@@ -145,7 +146,13 @@ export const componentsSlice = createSlice({
       const {fe_id,title} = actions.payload
       const targetComponent = state.componentsList.find(c => c.fe_id === fe_id)
       if(targetComponent)targetComponent.title = title
+    },
+    // 移动组件位置
+    moveComponent:(state,action:PayloadAction<{oldIndex:number,newIndex:number}>)=>{
+      const {oldIndex,newIndex} = action.payload
+      state.componentsList = arrayMove(state.componentsList,oldIndex,newIndex)
     }
+
   }
 })
 
@@ -161,5 +168,6 @@ export const {
   pasteComponentInfo,
   selectPrevComponent,
   selectFollowingComponent,
-  changeComponentTitle
+  changeComponentTitle,
+  moveComponent
 } = componentsSlice.actions;

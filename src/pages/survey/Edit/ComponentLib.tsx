@@ -27,7 +27,7 @@ const ComponentLib:FC = () => {
   }
 
   function showComponents(components:Array<ComponentConfigType<any>>){
-    console.log('函数调用：组件库显示 group 中组件');
+    //console.log('函数调用：组件库显示 group 中组件');
     
     if(components.length === 0){
       console.log('此 group 无 components');
