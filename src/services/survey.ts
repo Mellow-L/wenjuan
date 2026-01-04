@@ -37,7 +37,7 @@ export async function deleteSurveysService( ids:string[] ):Promise<ResDataType>{
   return data
 }
 
-// 更新某份问卷信息，opt 是更新的数据对象  此项可用于：star、delete、、
+// 更新某份问卷信息，opt 是更新的数据对象  此项可用于：star、delete、save、、
 export async function updateSurveyService(id: string,opt:{[key:string]:any}):Promise<ResDataType>{
   const url = `/api/survey/${id}`
   const data = (await myAxios.patch(url, opt)) as ResDataType
