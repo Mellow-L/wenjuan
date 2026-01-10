@@ -8,8 +8,10 @@ import { changeSelectedId } from "../../../store/componentsSlice";
 import LeftPanel from "./LeftPanel";
 import RightPanel from "./RightPanel";
 import Header from "./Header";
+import useGetSurveyInfo from "../../../hooks/useGetSurveyInfo";
 const Edit: FC = () => {
 	const dispatch = useDispatch()
+	const {title} = useGetSurveyInfo()
 	useTitle(`问卷编辑-${title}`)
 	const {loading} = useLoadSurveyData() // 加载当前问卷信息存入 store
 	function handleClick(){
