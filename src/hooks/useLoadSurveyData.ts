@@ -21,13 +21,13 @@ function useLoadSurveyData(){
 
 	useEffect(()=>{
 		if(!surveyInfo) return
-		const {componentsList = [],title = '',desc = '',js = '',css = ''} = surveyInfo
+		const {componentsList = [],title = '',isPublished =  false,desc = '',js = '',css = ''} = surveyInfo
 		let selectedId = '' 
 		if(componentsList.length > 0){
 			selectedId =  componentsList[0].fe_id
 		}
 		dispatch(resetComponents({componentsList,selectedId,copiedComponent:null})) // 带着selectedId 存入 store
-		dispatch(resetSurveyInfo({title,desc,js,css}))
+		dispatch(resetSurveyInfo({title,isPublished,desc,js,css}))
 	},[surveyInfo,dispatch]) // 监听surveyInfo新的返回 存入 store
 
 	useEffect(()=>{

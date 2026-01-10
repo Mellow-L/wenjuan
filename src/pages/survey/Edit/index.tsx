@@ -10,7 +10,7 @@ import RightPanel from "./RightPanel";
 import Header from "./Header";
 const Edit: FC = () => {
 	const dispatch = useDispatch()
-	useTitle("问卷编辑器");
+	useTitle(`问卷编辑-${title}`)
 	const {loading} = useLoadSurveyData() // 加载当前问卷信息存入 store
 	function handleClick(){
 		// 点击 main 除画布外区域后取消选中组件（在 Canvas 的点击事件中 阻止冒泡）

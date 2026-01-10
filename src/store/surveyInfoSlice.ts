@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 
 export type surveyInfoStateType = {
   title:string
+  isPublished?:boolean
   desc?:string
   js?:string
   css?:string

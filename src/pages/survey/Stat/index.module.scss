@@ -1,0 +1,31 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #eaeaea;
+}
+.content-wrapper{
+  flex: auto;
+}
+.content{
+  display: flex;
+  .left{
+    width: 285px;
+    background-color: #ffffff;
+    padding: 0 12px;
+    border-right: 1px solid #cac9c9;
+    overflow-y: auto;
+  }
+  .main{
+    flex: 1;
+    position: relative;
+
+  }
+  .right{
+    width: 300px;
+    background-color: #ffffff;
+    padding:0 12px;
+    border-left: 1px solid #cac9c9;
+    overflow-y: auto;
+  }
+}
