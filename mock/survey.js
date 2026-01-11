@@ -17,7 +17,7 @@ module.exports = [
           css:'hi im css',
           componentsList:[
             {
-              fe_id:Random.id(), // 组件唯一标识 用作前端的列表渲染
+              fe_id:'c1', // 组件唯一标识 用作前端的列表渲染
               type:'SurveyTitle', // 组件类型，前后端约定 type
               title:'标题', // 组件名称用于左右侧栏显示
               props:{ // 组件具体属性
@@ -29,7 +29,7 @@ module.exports = [
               isLocked:false,
             },
             {
-              fe_id:Random.id(),
+              fe_id:'c2',
               type:'SurveyParagraph', 
               title:'段落 n', 
               props:{ 
@@ -40,7 +40,7 @@ module.exports = [
               isLocked:false,
             },
             {
-              fe_id:Random.id(),
+              fe_id:'c3',
               type:'SurveyInfo', 
               title:'问卷信息1', 
               props:{ 
@@ -51,7 +51,7 @@ module.exports = [
               isLocked:false,
             },
             {
-              fe_id:Random.id(),
+              fe_id:'c4',
               type:'SurveySelectRadio', 
               title:'单选 1', 
               props:{ 
@@ -68,7 +68,7 @@ module.exports = [
               isLocked:false,
             },
             {
-              fe_id:Random.id(),
+              fe_id:'c5',
               type:'SurveySelectCheckbox', 
               title:'多选 1', 
               props:{ 
@@ -84,7 +84,7 @@ module.exports = [
               isLocked:false,
             },
             {
-              fe_id:Random.id(),
+              fe_id:'c6',
               type:'SurveyInput',
               title:'输入框0',
               props:{
@@ -95,7 +95,7 @@ module.exports = [
               isLocked:false,
             },
             {
-              fe_id:Random.id(),
+              fe_id:'c7',
               type:'SurveyInput',
               title:'输入框1',
               props:{
@@ -106,7 +106,7 @@ module.exports = [
               isLocked:true,
             },
             {
-              fe_id:Random.id(),
+              fe_id:'c8',
               type:'SurveyInput',
               title:'输入框2',
               props:{
