@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import styles from './index.module.scss'
 import Header from "./Header";
 import ComponentList from "./ComponentList";
+import StatForm from "./StatForm";
 const Stat: FC = () => {
   const {loading} = useLoadSurveyData()
   const  {title,isPublished} = useGetSurveyInfo()
@@ -45,7 +46,13 @@ const Stat: FC = () => {
 							setSelectedType={setSelectedType}
 						/>
 					</div>
-					<div className={styles.main}>main</div>
+					<div className={styles.main}>
+            <StatForm 
+              selectedId={selectedId}
+							setSelectedId={setSelectedId}
+							setSelectedType={setSelectedType}
+            />
+          </div>
 					<div className={styles.right}>right</div>
 				</div>
 			);
