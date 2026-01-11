@@ -11,6 +11,7 @@ module.exports = [
         data:{
           id: Random.id(),
           title: Random.ctitle(),
+          isPublished:true,
           desc:'描述xyz',
           js:'hello im js',
           css:'hi im css',
