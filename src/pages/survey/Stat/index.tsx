@@ -1,4 +1,4 @@
-import React,{type FC} from "react";
+import React,{useState, type FC} from "react";
 import { useTitle } from "ahooks";
 import useLoadSurveyData from "../../../hooks/useLoadSurveyData";
 import { Button, Result, Space, Spin } from "antd";
@@ -7,11 +7,15 @@ import { MANAGE_LIST_PATHNAME } from "../../../router";
 import { useNavigate } from "react-router-dom";
 import styles from './index.module.scss'
 import Header from "./Header";
+import ComponentList from "./ComponentList";
 const Stat: FC = () => {
   const {loading} = useLoadSurveyData()
   const  {title,isPublished} = useGetSurveyInfo()
   const nav = useNavigate()
   
+  const [selectedId, setSelectedId] = useState('')
+  const [selectedType, setSelectedType] = useState('')
+
   useTitle(`答卷统计-${title}`)
   const LoadingElem = (
     <Spin tip="Loading" size="large">
@@ -33,12 +37,18 @@ const Stat: FC = () => {
       />)
     }else{
       return (
-        <div className={styles.content}>
-          <div className={styles.left}>left</div>
-          <div className={styles.main}>main</div>
-          <div className={styles.right}>right</div>
-        </div>
-      )
+				<div className={styles.content}>
+					<div className={styles.left}>
+						<ComponentList
+							selectedId={selectedId}
+							setSelectedId={setSelectedId}
+							setSelectedType={setSelectedType}
+						/>
+					</div>
+					<div className={styles.main}>main</div>
+					<div className={styles.right}>right</div>
+				</div>
+			);
     }
   }
   
