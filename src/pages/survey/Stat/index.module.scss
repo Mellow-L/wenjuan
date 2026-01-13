@@ -1,14 +1,16 @@
 .container{
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
   background-color: #eaeaea;
 }
 .content-wrapper{
   flex: auto;
+  overflow: hidden;
 }
 .content{
   display: flex;
+  height: 100%;
   .left{
     width: 285px;
     background-color: #ffffff;
@@ -21,6 +23,7 @@
     position: relative;
     background-color: #ffffff;
     padding: 12px;
+    overflow-y: auto;
   }
   .right{
     width: 300px;

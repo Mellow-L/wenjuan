@@ -25,12 +25,13 @@ const StatForm:FC<PropsType> = (props:PropsType) => {
       return res
     },
     {
-      refreshDeps: [id, page, pageSize],
+      refreshDeps: [id, page, pageSize], // 刷新依赖项
       onSuccess(res){
         const {total,list = []} = res
-        console.log('统计的 list',list);
         setTotal(total)
         setList(list)
+        // console.log('统计的 list',list)
+        // console.log('page,pageSize,total',page,pageSize,total);
       },
     }
   )
@@ -67,7 +68,7 @@ const StatForm:FC<PropsType> = (props:PropsType) => {
   const TableElem = (
     <>
       <Table columns={columns} dataSource={dataSource} pagination={false}></Table>
-      <div style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center',marginTop:'10px' }}>
         <Pagination
           total={total}
           pageSize={pageSize}
