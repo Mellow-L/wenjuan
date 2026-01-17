@@ -50,3 +50,10 @@ export async function duplicateSurveyService(id:string):Promise<ResDataType>{
   const data = (await myAxios.post(url)) as ResDataType
   return data
 }
+
+// 获取问卷某组件的统计数据
+export async function getComponentStaticDataService(surveyId:string,componentId:string):Promise<ResDataType>{
+  const url = `/api/stat/${surveyId}/${componentId}`
+  const data = (await myAxios.get(url)) as ResDataType
+  return data
+}

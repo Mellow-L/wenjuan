@@ -21,3 +21,7 @@ export const SurveySelectRadioDefaultProps:SurveySelectRadioPropsType = {
   ],
   value:'default item1'
 }
+
+export type SurveySelectRadioStatProps = {
+  stat: Array<{name: string; count:number}>
+}

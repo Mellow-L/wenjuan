@@ -9,6 +9,7 @@ import styles from './index.module.scss'
 import Header from "./Header";
 import ComponentList from "./ComponentList";
 import StatForm from "./StatForm";
+import StatChart from "./StatChart";
 const Stat: FC = () => {
   const {loading} = useLoadSurveyData()
   const  {title,isPublished} = useGetSurveyInfo()
@@ -53,7 +54,14 @@ const Stat: FC = () => {
 							setSelectedType={setSelectedType}
             />
           </div>
-					<div className={styles.right}>right</div>
+					<div className={styles.right}>
+            <StatChart
+              selectedId={selectedId}
+              selectedType={selectedType}
+							setSelectedId={setSelectedId}
+							setSelectedType={setSelectedType}
+            />
+          </div>
 				</div>
 			);
     }

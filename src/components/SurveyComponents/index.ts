@@ -4,8 +4,8 @@ import { SurveyTitleConfig, type SurveyTitlePropsType } from './SurveyTitle/conf
 import { SurveyParagraphConfig, type SurveyParagraphPropsType } from './SurveyParagraph/config';
 import { SurveyInfoConfig, type SurveyInfoPropsType } from './SurveyInfo/config';
 import { SurveyInputParaConfig, type SurveyInputParaPropsType } from './SurveyInputPara/config';
-import { SurveySelectCheckboxConfig, type SurveySelectCheckboxPropsType } from "./SurveySelectCheckbox/config";
-import { SurveySelectRadioConfig, type SurveySelectRadioPropsType } from "./SurveySelectRadio/config";
+import { SurveySelectCheckboxConfig, type SurveySelectCheckboxPropsType, type SurveySelectCheckboxStatProps } from "./SurveySelectCheckbox/config";
+import { SurveySelectRadioConfig, type SurveySelectRadioPropsType, type SurveySelectRadioStatProps } from "./SurveySelectRadio/config";
 
 // 各个组件的 props type
 export type ComponentsPropsType = 
@@ -17,12 +17,14 @@ export type ComponentsPropsType =
   SurveySelectRadioPropsType&
   SurveySelectCheckboxPropsType// TODO:理解 &替换｜ 
 
+type ComponentStatPropsType = SurveySelectRadioStatProps & SurveySelectCheckboxStatProps 
 // 各个组件的 config type，对应各个 config.ts
 export type ComponentConfigType<T> = {
   title:string
   type:string
   Component: FC<T>  // 组件的 画布 JSX
   ComponentProp: FC<T> // 组件的 属性面板 JSX
+  ComponentStat?:FC<ComponentStatPropsType> // 组件的 统计图表 JSX。可选。
   defaultProps:T // 组件 prop type 的联合类型
 }
 
