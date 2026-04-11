@@ -29,7 +29,7 @@ export async function loginService(
   username:string,
   password:string
 ):Promise<ResDataType>{
-  const url = '/api/user/login'
+  const url = '/api/auth/login'
   const body = {
     username,
     password

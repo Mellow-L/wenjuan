@@ -38,7 +38,7 @@ const MainLayout: FC = () => {
       
 
       <Footer className={styles.footer}>
-        问卷调查工具 &copy; 2025 - present. Created by 林怡然
+        问卷调查工具 &copy; 2026 - present. Created by Mellow
       </Footer>
     </Layout>  
   </>)

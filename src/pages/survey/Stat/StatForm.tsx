@@ -38,7 +38,7 @@ const StatForm:FC<PropsType> = (props:PropsType) => {
   const {componentsList} = useGetComponentsInfo()
   const columns = componentsList.filter(c=>(
     c.type === 'SurveyInput'||
-    c.type === 'SurveyTextarea'||
+    c.type === 'SurveyInputPara'||
     c.type === 'SurveySelectRadio'||
     c.type === 'SurveySelectCheckbox'
   )).map(c => {

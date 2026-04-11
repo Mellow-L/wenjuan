@@ -21,8 +21,7 @@ const Header:FC = () => {
   }
   function getShareElem(){
     if(!isPublished)return null
-    // const url = `http://localhost:3000/survey/${id}`
-    const url = `http://172.20.10.3:3000/survey/${id}`
+    const url = `http://localhost:3000/survey/${id}`
 
     const QRCodeElem = <div style={{textAlign:'center'}}>
       <QRCodeSVG value={url} size={150}/>

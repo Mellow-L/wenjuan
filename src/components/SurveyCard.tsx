@@ -37,7 +37,7 @@ const SurveyCard: FC<PropsType> = (props: PropsType) => {
 	const [isDeletedState,setIsDeletedState] = useState(false) 
 
 	const { loading:eraseLoading ,run:eraseSurvey } = useRequest(
-		async () => await updateSurveyService(_id,{isDelete:true}),
+		async () => await updateSurveyService(_id,{isDeleted:true}),
 		{
 			manual:true,
 			onSuccess(){

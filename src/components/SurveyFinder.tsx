@@ -40,7 +40,6 @@ const SurveyFinder: FC = () => {
 				onSearch={onSearch}
 				enterButton
 			/>
-			{surveyInfo}
 		</>
 	);
 };

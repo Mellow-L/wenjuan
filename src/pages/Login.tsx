@@ -14,7 +14,9 @@ import {
 import { UserOutlined } from "@ant-design/icons";
 import styles from "../styles/Common.module.scss";
 import { MANAGE_LIST_PATHNAME, REGISTER_PATHNAME } from "../router";
-import { loginService } from "../services/user";
+import { loginService, getUserInfoService } from "../services/user";
+import { useDispatch } from "react-redux";
+import { loginReducer } from "../store/userSlice";
 import { setToken } from "../utils/user-token";
 const { Title } = Typography;
 
@@ -53,7 +55,8 @@ const Login: FC = () => {
 		form.setFieldsValue(storedInfo);
 	});
 	useTitle("登录");
-	const nav = useNavigate()
+	const nav = useNavigate();
+	const dispatch = useDispatch();
 	
 	const { loading:loginLoading, run: loginUser } = useRequest(
 		async (values)=>{
@@ -63,10 +66,12 @@ const Login: FC = () => {
 		},
 		{
 			manual:true,
-			onSuccess(result){
+			async onSuccess(result){
 				const { token = ''} = result
 				// JWT
 				setToken(token)
+				const userInfo = await getUserInfoService();
+				dispatch(loginReducer({username: userInfo.username, nickname: userInfo.nickname}));
 				message.success('登录成功')
 				nav(MANAGE_LIST_PATHNAME)
 			}

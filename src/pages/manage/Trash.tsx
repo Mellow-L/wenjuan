@@ -57,6 +57,7 @@ const Trash: FC = () => {
 		onSuccess(){
 			message.success('抹除成功');
 			setSelectedIds([])
+			refresh()
 		}
 	})
 
